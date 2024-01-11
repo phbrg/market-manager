@@ -8,5 +8,36 @@ module.exports = class UserController {
       res.status(422).json({ message: 'Invalid credentials.' });
       return;
     }
+
+    const stringRegex = /^[0-9a-zA-Z ]+$/i;
+    if(!stringRegex.test(name)) {
+      res.status(422).json({ message: 'Invalid product name.' });
+      return;
+    }
+
+    const expirationDate = new Date(expiration);
+    if(expirationDate < new Date()) {
+      res.status(422).json({ message: 'Invalid product expiration date.' });
+      return;
+    }
+
+    const productAlredyRegisterd = await Product.findOne({ raw: true, where: { name: name } }) || null;
+    if(productAlredyRegisterd) {
+      res.status(422).json({ message: 'Product alredy registered.' });
+      return;
+    }
+
+    const product = {
+      name,
+      price,
+      amount,
+      expiration
+    }
+
+    await Product.create(product)
+      .then((product) => {
+        res.status(200).json({ message: 'Product successfully created.', product });
+      })
+      .catch((err) => console.log(`> create product error: ${err}`));
   }
 }
