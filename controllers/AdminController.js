@@ -71,7 +71,7 @@ module.exports = class AdminController {
 
     switch(param1) {
       case 'employee':
-        response = await User.findAll({ raw: true, where: { role: 'EMPLOYEE' } });
+        response = await User.findAll({ raw: true, where: { role: 'EMPLOYEE' } }) || null;
         status = 200;
         break;
       case 'id': 
@@ -79,7 +79,7 @@ module.exports = class AdminController {
           response = 'Invalid search.';
           status = 404;
         } else {
-          response = await User.findAll({ raw: true, where: { id: parseFloat(param2) } });
+          response = await User.findAll({ raw: true, where: { id: parseFloat(param2) } }) || null;
           status = 200;
         }
         break;
@@ -88,7 +88,7 @@ module.exports = class AdminController {
           response = 'Invalid search.';
           status = 404;
         } else {
-          response = await User.findAll({ raw: true, where: { name: param2.toLowerCase() } });
+          response = await User.findAll({ raw: true, where: { name: param2.toLowerCase() } }) || null;
           status = 200;
         }
         break;
@@ -97,13 +97,18 @@ module.exports = class AdminController {
           response = 'Invalid search.';
           status = 404;
         } else {
-          response = await User.findAll({ raw: true, where: { login: param2.toLowerCase() } });
+          response = await User.findAll({ raw: true, where: { login: param2.toLowerCase() } }) || null;
           status = 200;
         }
         break;
       default:
-        response = await User.findAll({ raw: true });
+        response = await User.findAll({ raw: true }) || null;
         status = 200;
+    }
+
+    if(response == [] || response.length == 0 || response == '' || response == null) {
+      response = "Couldn't find your user.";
+      status = 404;
     }
 
     res.status(status).json({ response });
