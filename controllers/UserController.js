@@ -1,5 +1,10 @@
+const { Op } = require('sequelize');
+const bcrypt = require('bcrypt');
+
 const Product = require('../models/Product');
-const { Op, where } = require('sequelize'); 
+const User = require('../models/User');
+
+const createUserToken = require('../helpers/createUserToken');
 
 module.exports = class UserController {
   static async registerProduct(req, res) {
@@ -39,7 +44,10 @@ module.exports = class UserController {
       .then((product) => {
         res.status(200).json({ message: 'Product successfully created.', product });
       })
-      .catch((err) => console.log(`> create product error: ${err}`));
+      .catch((err) => { 
+        console.log(`> create product error: ${err}`) 
+        res.status(500).json({ message: 'Internal server error, try again later.' });
+      });
   }
 
   static async getProducts(req, res) {
@@ -166,7 +174,10 @@ module.exports = class UserController {
     await Product.update(putProduct, { where: { id: parseFloat(product) } })
       .then(() => {
         res.status(200).json({ message: 'Product successfully updated.' });
-      }).catch((err) => console.log(`> product update error: ${err}`));
+      }).catch((err) => { 
+        console.log(`> product update error: ${err}`);
+        res.status(500).json({ message: 'Internal server error, try again later.' });
+      });
   }
 
   static async deleteProduct(req, res) {
@@ -187,6 +198,32 @@ module.exports = class UserController {
     await Product.destroy({ where: { id: parseFloat(product) } })
       .then(() => {
         res.status(200).json({ message: 'Product sucessfully deleted.' });
-      }).catch((err) => console.log(`> product delete error: ${err}`));
+      }).catch((err) => { 
+        console.log(`> product delete error: ${err}`); 
+        res.status(500).json({ message: 'Internal server error, try again later.' });
+      });
+  }
+
+  static async login(req, res) {
+    const { login, password } = req.body;
+
+    if(!login || !password) {
+      res.status(422).json({ message: 'Invalid credentials.' });
+      return;
+    }
+
+    const userOnDatabase = await User.findOne({ raw: true, where: { login: login.toLowerCase() } }) || null;
+    if(!userOnDatabase) {
+      res.status(422).json({ message: 'Invalid login.' });
+      return;
+    }
+
+    const comparePassword = bcrypt.compareSync(password, userOnDatabase.password);
+    if(!comparePassword) {
+      res.status(422).json({ message: 'Invalid password.' });
+      return;
+    }
+
+    createUserToken(userOnDatabase, req, res);
   }
 }

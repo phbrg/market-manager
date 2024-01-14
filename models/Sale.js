@@ -5,6 +5,10 @@ const User = require('./User');
 const Product = require('./Product');
 
 const Sale = db.define('Sale', {
+    products: {
+        type: DataTypes.ARRAY(DataTypes.JSONB),
+        allowNull: false
+    },
     amount: {
         type: DataTypes.INTEGER,
         allowNull: false

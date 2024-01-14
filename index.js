@@ -7,7 +7,13 @@ const app = express();
 
 app.use(express.json());
 app.use(express.static('public'));
-app.use(cors({ credentials: true, origin: `http://localhost:${port}` }));
+app.use(cors({
+    origin: `http://localhost:${port}`,
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    maxAge: 3600
+}));
 
 // database
 const conn = require('./db/conn');
@@ -19,12 +25,12 @@ const Sale = require('./models/Sale');
 // routes
 const AdminRoute = require('./routes/AdminRoute');
 const AdminController = require('./controllers/AdminController');
+app.use('/admin', AdminRoute);
 
 const UserRoute = require('./routes/UserRoute');
 const UserController = require('./controllers/UserController');
-
-app.use('/admin', AdminRoute);
 app.use('/', UserRoute);
+
 
 // server
 conn
