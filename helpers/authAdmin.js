@@ -23,7 +23,7 @@ const authAdmin = async (req, res, next) => {
 
     const user = await getUserByToken(token);
 
-    if(user.role == 'BOSS') {
+    if(user.role == 'BOSS' || user.role == 'MANAGER') {
       next();
     } else {
       res.status(401).json({ error: 'Access denied.' });
