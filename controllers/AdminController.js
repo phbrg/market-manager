@@ -54,7 +54,7 @@ module.exports = class AdminController {
 
     await User.create(user)
       .then(async (user) => {
-        await createUserToken(user, res);
+        await createUserToken(user, req, res);
       })
       .catch((err) => { 
         console.log(`> register user error: ${err}`);

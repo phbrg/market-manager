@@ -1,10 +1,13 @@
-const { Op } = require('sequelize');
+const { Op, where } = require('sequelize');
 const bcrypt = require('bcrypt');
 
 const Product = require('../models/Product');
 const User = require('../models/User');
+const Sale = require('../models/Sale');
 
 const createUserToken = require('../helpers/createUserToken');
+const getToken = require('../helpers/getToken');
+const getUserByToken = require('../helpers/getUserByToken');
 
 module.exports = class UserController {
   static async registerProduct(req, res) {
@@ -225,5 +228,52 @@ module.exports = class UserController {
     }
 
     createUserToken(userOnDatabase, req, res);
+  }
+
+  static async registerSale(req, res) {
+    const { products } = req.body;
+
+    if(!products || products.length == 0) {
+      res.status(422).json({ message: 'Invalid products.' });
+      return;
+    }
+
+    const userToken = await getToken(req);
+    const user = await getUserByToken(userToken, req, res);
+
+    try {
+      for (const product of products) {
+        const productOnDatabase = await Product.findOne({ raw: true, where: { id: parseFloat(product.id) } }) || null;
+        if(!productOnDatabase) {
+          throw new Error('Invalid product id.');
+        }
+
+        if(productOnDatabase.amount == 0 || product.amount > productOnDatabase.amount) {
+          throw new Error('Invalid product amount.');
+        }
+        
+        const newAmount = productOnDatabase.amount - product.amount;
+
+        try {
+          await Product.update({ amount: newAmount }, { where: { id: product.id }});
+        } catch(err) {
+          console.log(`> update product error: ${err}`);
+          res.status(500).json({ message: 'Internal server error, try again later.' });
+          return;
+        }
+      }
+    } catch(err) {
+      console.log(err);
+      res.status(422).json({ error: err.message });
+      return;
+    } 
+
+    await Sale.create({ products, UserId: parseFloat(user.id) })
+      .then((sale) => {
+        res.status(200).json({ message: 'Sale successfully registered.', sale });
+      }).catch((err) => {
+        console.log(`> create sale error: ${err}`);
+        res.status(500).json({ message: 'Internal server error, try again later.' });
+      })
   }
 }

@@ -6,7 +6,7 @@ const authAdmin = require('../helpers/authAdmin');
 
 router.get('/users/:param1?/:param2?', authAdmin, AdminController.getUsers);
 
-router.post('/register', authAdmin, AdminController.registerUser);
+router.post('/register', AdminController.registerUser);
 
 router.put('/edituser/:userId', authAdmin, AdminController.editUser);
 

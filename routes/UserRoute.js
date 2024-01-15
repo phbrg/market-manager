@@ -6,6 +6,7 @@ const authUser = require('../helpers/authUser');
 
 router.post('/registerproduct', authUser, UserController.registerProduct);
 router.post('/login', UserController.login);
+router.post('/registersale', authUser, UserController.registerSale);
 
 router.put('/editproduct/:product', authUser, UserController.editProduct);
 
