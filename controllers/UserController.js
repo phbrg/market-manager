@@ -8,6 +8,7 @@ const Sale = require('../models/Sale');
 const createUserToken = require('../helpers/createUserToken');
 const getToken = require('../helpers/getToken');
 const getUserByToken = require('../helpers/getUserByToken');
+const createLog = require('../helpers/createLog');
 
 module.exports = class UserController {
   static async registerProduct(req, res) {
@@ -43,8 +44,16 @@ module.exports = class UserController {
       expiration
     }
 
+    const userToken = await getToken(req);
+    const user = await getUserByToken(userToken, req, res);
+
     await Product.create(product)
-      .then((product) => {
+      .then(async (product) => {
+        try {
+          await createLog('CREATE', `New product registered in the database. [Name: ${product.name}, Price: ${product.price}, Amount: ${product.amount}, Expiration: ${product.expiration}]`, user.id);
+        } catch(err) {
+          console.log(`> create log error: ${err}`);
+        }
         res.status(200).json({ message: 'Product successfully created.', product });
       })
       .catch((err) => { 
@@ -174,8 +183,16 @@ module.exports = class UserController {
       }
     }
 
+    const userToken = await getToken(req);
+    const user = await getUserByToken(userToken, req, res);
+
     await Product.update(putProduct, { where: { id: parseFloat(product) } })
-      .then(() => {
+      .then(async () => {
+        try {
+          await createLog('UPDATE', `Product [${product}] has been updated.`, user.id);
+        } catch(err) {
+          console.log(`> create log error: ${err}`);
+        }
         res.status(200).json({ message: 'Product successfully updated.' });
       }).catch((err) => { 
         console.log(`> product update error: ${err}`);
@@ -198,8 +215,16 @@ module.exports = class UserController {
       return;
     }
 
+    const userToken = await getToken(req);
+    const user = await getUserByToken(userToken, req, res);
+
     await Product.destroy({ where: { id: parseFloat(product) } })
-      .then(() => {
+      .then(async () => {
+        try {
+          await createLog('DELETE', `Product [${product}] has been deleted.`, user.id);
+        } catch(err) {
+          console.log(`> create log error: ${err}`);
+        }
         res.status(200).json({ message: 'Product sucessfully deleted.' });
       }).catch((err) => { 
         console.log(`> product delete error: ${err}`); 
@@ -225,6 +250,12 @@ module.exports = class UserController {
     if(!comparePassword) {
       res.status(422).json({ message: 'Invalid password.' });
       return;
+    }
+
+    try {
+      await createLog('ACESS', `User [${userOnDatabase.id}] login on [IP: ${req.headers['x-forwarded-for'] || req.connection.remoteAddress}, Device: ${req.headers['user-agent']}].`);
+    } catch(err) {
+      console.log(`> create log error: ${err}`);
     }
 
     createUserToken(userOnDatabase, req, res);
@@ -269,7 +300,12 @@ module.exports = class UserController {
     } 
 
     await Sale.create({ products, UserId: parseFloat(user.id) })
-      .then((sale) => {
+      .then(async (sale) => {
+        try {
+          await createLog('CREATE', `New sale registered in database.`, user.id);
+        } catch(err) {
+          console.log(`> create log error: ${err}`);
+        }
         res.status(200).json({ message: 'Sale successfully registered.', sale });
       }).catch((err) => {
         console.log(`> create sale error: ${err}`);

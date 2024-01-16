@@ -2,10 +2,12 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 
 const User = require('../models/User');
+const Log = require('../models/Log');
 
 const createUserToken = require('../helpers/createUserToken');
 const getToken = require('../helpers/getToken');
 const getUserByToken = require('../helpers/getUserByToken');
+const createLog = require('../helpers/createLog');
 
 module.exports = class AdminController {
   static async registerUser(req, res) {
@@ -43,8 +45,8 @@ module.exports = class AdminController {
       return;
     }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
 
     const user = {
       name: name.toLowerCase(),
@@ -52,8 +54,16 @@ module.exports = class AdminController {
       password: hashedPassword
     }
 
+    const userToken = await getToken(req);
+    const admin = await getUserByToken(userToken, req, res);
+
     await User.create(user)
       .then(async (user) => {
+        try {
+          await createLog('CREATE', `New user registered in the database. [Username: ${user.name}, Login: ${user.login}]`, admin.id);
+        } catch(err) {
+         console.log(`> create log error: ${err}`);
+        }
         await createUserToken(user, req, res);
       })
       .catch((err) => { 
@@ -188,8 +198,16 @@ module.exports = class AdminController {
       putUser.role == role.toUpperCase();
     }
 
+    const userToken = await getToken(req);
+    const admin = await getUserByToken(userToken, req, res);
+
     await User.update(putUser, { where: { id: parseFloat(userId) } })
-      .then(() => {
+      .then(async () => {
+        try {
+          await createLog('UPDATE', `User [${userId}] had his account updated.`, admin.id);
+        } catch(err) {
+          console.log(`> create log error: ${err}`);
+        }
         res.status(200).json({ message: 'User successfully updated.' });
       }).catch((err) => {
         console.log(`> update user error: ${err}`);
@@ -200,14 +218,14 @@ module.exports = class AdminController {
   static async deleteUser(req, res) {
     const { userId } = req.params;
     const userToken = await getToken(req);
-    const userByToken = await getUserByToken(userToken, req, res);
+    const admin = await getUserByToken(userToken, req, res);
 
     if(!userId) {
       res.status(404).json({ message: 'Invalid user id.' });
       return;
     }
 
-    if(parseFloat(userId) == parseFloat(userByToken.id)) {
+    if(parseFloat(userId) == parseFloat(admin.id)) {
       res.status(422).json({ message: 'You cannot delete your own account.' });
       return;
     }
@@ -219,11 +237,72 @@ module.exports = class AdminController {
     }
 
     await User.destroy({ where: { id: parseFloat(userId) } })
-      .then(() => {
+      .then(async () => {
+        try {
+          await createLog('DELETE', `User [${userId}] had their account deleted.`, admin.id);
+        } catch(err) {
+          console.log(`> create log error: ${err}`);
+        }
         res.status(200).json({ message: 'User successfully deleted.' });
       }).catch((err) => {
         console.log(`> user delete error: ${err}`);
         res.status(500).json({ message: 'Internal server error, try again later.' });
       });
+  }
+
+  static async getLogs(req, res) {
+    let param1 = null;
+    let param2 = null;
+
+    if(req.params) {
+      param1 = req.params.param1;
+      param2 = req.params.param2 || null;
+    }
+
+    let response;
+    let status;
+
+    switch(param1) {
+      case 'create':
+        response = await Log.findAll({ raw: true, where: { category: 'CREATE' } }) || null;
+        status = 200;
+        break;
+      case 'update':
+        response = await Log.findAll({ raw: true, where: { category: 'UPDATE' } }) || null;
+        status = 200;
+        break;
+      case 'delete':
+        response = await Log.findAll({ raw: true, where: { category: 'DELETE' } }) || null;
+        status = 200;
+        break;
+      case 'id': 
+        if(!param2) {
+          response = 'Invalid search.';
+          status = 404;
+        } else {
+          response = await Log.findAll({ raw: true, where: { id: parseFloat(param2) } }) || null;
+          status = 200;
+        }
+        break;
+      case 'userid': 
+        if(!param2) {
+          response = 'Invalid search.';
+          status = 404;
+        } else {
+          response = await Log.findAll({ raw: true, where: { UserId: parseFloat(param2) } }) || null;
+          status = 200;
+        }
+        break;
+      default:
+        response = await Log.findAll({ raw: true }) || null;
+        status = 200;
+    }
+
+    if(response == [] || response.length == 0 || response == '' || response == null) {
+      response = "Couldn't find your log.";
+      status = 404;
+    }
+
+    res.status(status).json({ response });
   }
 }

@@ -21,6 +21,7 @@ const conn = require('./db/conn');
 const User = require('./models/User');
 const Product = require('./models/Product');
 const Sale = require('./models/Sale');
+const Log = require('./models/Log');
 
 // routes
 const AdminRoute = require('./routes/AdminRoute');
