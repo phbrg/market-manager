@@ -94,20 +94,20 @@ module.exports = class UserController {
         break;
       case 'expired': 
         const productsExpired = await Product.findAll({ raw: true });
-        productsExpired.map((product) => {
+        for(const product of productsExpired) {
           if(new Date(product.expiration) < new Date()) {
             response.push(product);
           }
-        });
+        }
         status = 200;
         break;
       case 'unexpired': 
         const productsUnexpired = await Product.findAll({ raw: true }) || null;
-        productsUnexpired.map((product) => {
+        for(const product of productsExpired) {
           if(new Date(product.expiration) > new Date()) {
             response.push(product);
           }
-        });
+        }
         status = 200;
         break;
       default:
