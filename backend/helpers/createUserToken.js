@@ -7,8 +7,12 @@ const createUserToken = async(user, req, res) => {
     name: user.name,
   }, process.env.JWT_KEY);
 
-  // remove token ( send to cookies )
-  res.status(200).json({ message: 'User successfully authenticated.', token: token});
+  res.cookie('token', token, {
+    httpOnly: true,
+    secure: true,
+  });
+  
+  res.status(200).json({ message: 'User successfully authenticated.' });
 }
 
 module.exports = createUserToken;
