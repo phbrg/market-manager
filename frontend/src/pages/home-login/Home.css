@@ -12,13 +12,12 @@
 .Home form {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-direction: column;
   flex-wrap: wrap;
-  height: 55vh;
+  height: 65vh;
   width: 31vw;
-  padding: 2vh 1vw;
-  gap: 6vh 0;
+  padding: 6vh 1vw;
   background-color: #fff;
   border: 1px solid rgb(220, 220, 220);
   border-radius: 7px;
@@ -29,11 +28,18 @@
   font-weight: 500;
 }
 
-.Home form div {
+.Home form .inputs {
   display: flex;
   flex-direction: column;
+  gap: 2vh;
   width: 100%;
-  gap: 2vh 0;
+}
+
+.Home form .button-error {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  width: 100%;
 }
 
 .Home form div fieldset {
@@ -57,7 +63,7 @@
   border: 1px solid rgb(0, 98, 255);
 }
 
-.Home form button {
+.Home form div button {
   font-size: 1.2vw;
   color: #fff;
   padding: 2vh 0;
@@ -71,6 +77,13 @@
   transform: scale(1.012);
 }
 
+.Home form div .error {
+  font-size: 1vw;
+  font-size: 500;
+  word-wrap: break-word;
+  color: red;
+  padding: 0 1vw;
+}
 @media screen and (max-width: 768px) {
   .Home form {
     padding: 1vh 4vw;

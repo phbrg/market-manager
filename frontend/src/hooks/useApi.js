@@ -30,3 +30,5 @@ const useApi = (url, method, body = null, token = null) => {
 
   return { data, error, loading };
 };
+
+export default useApi

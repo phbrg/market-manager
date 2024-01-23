@@ -133,6 +133,11 @@ module.exports = class AdminController {
     const { userId } = req.params;
     const { name, login, password, confirmPassword, role, adminPassword } = req.body;
 
+    if(!adminPassword || adminPassword.length == 0 || adminPassword !== process.env.SYSTEM_PASSWORD) {
+      res.status(404).json({ message: 'Acess denied.' });
+      return;
+    }
+
     if(!userId) {
       res.status(404).json({ message: 'Invalid user id.' });
       return;
@@ -195,7 +200,7 @@ module.exports = class AdminController {
     }
 
     if(role && role.length !== 0) {
-      putUser.role == role.toUpperCase();
+      putUser.role = role.toUpperCase();
     }
 
     const userToken = await getToken(req);

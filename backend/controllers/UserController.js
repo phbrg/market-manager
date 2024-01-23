@@ -312,4 +312,16 @@ module.exports = class UserController {
         res.status(500).json({ message: 'Internal server error, try again later.' });
       })
   }
+
+  static async logout(req, res) {
+    const userToken = await getToken(req);
+    const user = await getUserByToken(userToken, req, res) || null;
+
+    if(!user) {
+      res.status(404).json({ message: 'Logout internal error, try again later.' });
+      return;
+    }
+
+    res.status(200).clearCookie('token').json({ message: 'You logout successfully.' });
+  }
 }
