@@ -1,37 +1,29 @@
+import Cookies from 'js-cookie';
 import useApi from '../../hooks/useApi'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './Home.css'
 
 const Home = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
 
-  const { data: apiData, error: apiError } = useApi(import.meta.env.VITE_API_URL, 'POST', { login, password });
+  const { data, error: apiError, loading, fetchData } = useApi('http://localhost:3001/login', 'POST', { login, password });
 
-  useEffect(() => {
-    if (apiData) {
-      setData(apiData);
-    }
-    if (apiError) {
-      setError(apiError);
-    }
-  }, [apiData, apiError]);
-
-  const handleForm = (e) => {
+  const handleForm = async (e) => {
     e.preventDefault();
 
     if(!login || !password || login.length === 0 || password.length === 0) {
       setError('Invalid credentials');
+      return;
     }
 
-    if(error) {
-      setError(error);
-    }
+    await fetchData();
 
-    if(data) {
-      alert(data);
+    if(apiError) {
+      setError(apiError);
+    } else {
+      // redirect user
     }
   }
 
