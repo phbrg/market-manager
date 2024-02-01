@@ -4,5 +4,11 @@
 
 .Login h1 {
   font-size: 2vw;
-  width: 30%;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .Login h1 {
+    font-size: 1.8vh;
+  }
 }

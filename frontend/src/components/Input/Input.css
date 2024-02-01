@@ -28,3 +28,17 @@ label input:focus {
 label input::placeholder {
   font-size: 1.14vw;
 }
+
+@media screen and (max-width: 768px) {
+  label {
+    font-size: 1.4vh;
+    gap: 0.2vh 0;
+  }
+  label input {
+    font-size: 1.6vh;
+    padding: 1vh 2vw;
+  } 
+  label input::placeholder {
+    font-size: 1.4vh;
+  }
+}

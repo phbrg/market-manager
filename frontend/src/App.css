@@ -28,7 +28,7 @@ form button {
   color: #fff;
   font-weight: 500;
   padding: 1.6vh 0;
-  border-radius: 5px;
+  border-radius: 7px;
 }
 
 .form-error {
@@ -57,4 +57,19 @@ form button {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@media screen and (max-width: 768px) {
+  form {
+    width: 90%;
+    height: auto;
+    gap: 1vh 0;
+  }
+  form button {
+    padding: 1.2vh 0;
+    font-size: 1.6vh;
+  }
+  .form-error {
+    font-size: 1.1vh;
+  }
 }

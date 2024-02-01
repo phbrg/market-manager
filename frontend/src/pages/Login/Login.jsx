@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie';
 
 import Input from '../../components/Input/Input'
@@ -9,8 +8,6 @@ import useApi from '../../hooks/useApi'
 import './Login.css'
 
 const Login = () => {
-  const navigate = useNavigate();
-
   const [user, setUser] = useState({});
   const { data, error, loading, fetchData } = useApi(`${import.meta.env.VITE_API_URL}/login`, 'POST', user);
 
@@ -26,8 +23,8 @@ const Login = () => {
 
   useEffect(() => {
     if(data) {
-      Cookies.set('logged', true, { expires: 1 });
-      navigate('/teste');
+      Cookies.set('logged', 1, { expires: 1 });
+      window.location.href = '/';
     }
   }, [data, error]);
 
@@ -37,8 +34,8 @@ const Login = () => {
       {
         loading && <div className="loader"></div>
       }
-      <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
+        <h1>Sign In</h1>
         <Input type='text' text='Login' name='login' placeholder='Your login' handleOnChange={handleChange} required={true} />
         <Input type='password' text='Password' name='password' placeholder='Your password' handleOnChange={handleChange} required={true} />
         {
