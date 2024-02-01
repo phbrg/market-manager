@@ -129,7 +129,7 @@ module.exports = class UserController {
       status = 404;
     }
 
-    res.status(status).json({ response });
+    res.status(status).json({ message: response });
   }
 
   static async editProduct(req, res) {

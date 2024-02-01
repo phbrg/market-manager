@@ -126,7 +126,7 @@ module.exports = class AdminController {
       status = 404;
     }
 
-    res.status(status).json({ response });
+    res.status(status).json({ message: response });
   }
 
   static async editUser(req, res) {
@@ -308,6 +308,6 @@ module.exports = class AdminController {
       status = 404;
     }
 
-    res.status(status).json({ response });
+    res.status(status).json({ message: response });
   }
 }
