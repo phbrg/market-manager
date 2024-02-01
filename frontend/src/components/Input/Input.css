@@ -1,0 +1,30 @@
+label {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  height: auto;
+  gap: 0.5vh 0;
+  font-size: 1.1vw;
+  font-weight: 500;
+  color: rgb(43, 43, 43);
+}
+
+label input {
+  width: 100%;
+  height: auto;
+  font-size: 1.29vw;
+  border: 2px solid var(--lgray);
+  padding: 1.6vh 0.8vw;
+  border-radius: 7px;
+}
+
+label input:focus {
+  border: 2px solid var(--blue);
+}
+
+label input::placeholder {
+  font-size: 1.14vw;
+}

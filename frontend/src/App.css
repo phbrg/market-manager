@@ -1,0 +1,60 @@
+section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  height: auto;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 35%;
+  height: auto;
+  gap: 2vh 0;
+  padding: 2vh 1.8vw;
+}
+
+form button {
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.2vw;
+  background-color: var(--blue);
+  color: #fff;
+  font-weight: 500;
+  padding: 1.6vh 0;
+  border-radius: 5px;
+}
+
+.form-error {
+  font-size: 1vw;
+  color: red;
+  width: 98%;
+}
+
+.loader {
+  position: absolute;
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid var(--blue);
+  width: 60px;
+  height: 60px;
+  -webkit-animation: spin 1.5s linear infinite;
+  animation: spin 1.5s linear infinite;
+  background-color: #fff;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

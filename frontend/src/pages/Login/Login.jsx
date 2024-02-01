@@ -33,16 +33,16 @@ const Login = () => {
 
 
   return (
-    <section>
+    <section className='Login'>
       {
-        loading && <p>Loading...</p>
+        loading && <div className="loader"></div>
       }
-      <h1>Login</h1>
+      <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
-        <Input type='text' text='Login' name='login' placeholder='Your login' handleOnChange={handleChange} />
-        <Input type='password' text='Password' name='password' placeholder='Your password' handleOnChange={handleChange} />
+        <Input type='text' text='Login' name='login' placeholder='Your login' handleOnChange={handleChange} required={true} />
+        <Input type='password' text='Password' name='password' placeholder='Your password' handleOnChange={handleChange} required={true} />
         {
-          error && <p>{error}</p>
+          error && <p className='form-error'>{error}</p>
         }
         <button>Sign in</button>
       </form>
