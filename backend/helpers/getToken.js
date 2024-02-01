@@ -1,8 +1,12 @@
-const getToken = (req) => {
-  const authHeader = req.headers.authorization;
-  const token = authHeader.split(' ')[1];
+const getToken = (req, res) => {
+  const httpToken = req.cookies.token || null;
 
-  return token;
+  if(!httpToken) {
+    res.status(401).json({ message: 'Acess denied.' });
+    return;
+  }
+
+  return httpToken;
 }
 
 module.exports = getToken;

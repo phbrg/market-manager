@@ -54,7 +54,7 @@ module.exports = class AdminController {
       password: hashedPassword
     }
 
-    const userToken = await getToken(req);
+    const userToken = await getToken(req, res);
     const admin = await getUserByToken(userToken, req, res);
 
     await User.create(user)
@@ -64,7 +64,7 @@ module.exports = class AdminController {
         } catch(err) {
          console.log(`> create log error: ${err}`);
         }
-        await createUserToken(user, req, res);
+        res.status(200).json({ message: 'User successfully registered.' });
       })
       .catch((err) => { 
         console.log(`> register user error: ${err}`);
@@ -203,7 +203,7 @@ module.exports = class AdminController {
       putUser.role = role.toUpperCase();
     }
 
-    const userToken = await getToken(req);
+    const userToken = await getToken(req, res);
     const admin = await getUserByToken(userToken, req, res);
 
     await User.update(putUser, { where: { id: parseFloat(userId) } })
@@ -222,7 +222,7 @@ module.exports = class AdminController {
 
   static async deleteUser(req, res) {
     const { userId } = req.params;
-    const userToken = await getToken(req);
+    const userToken = await getToken(req, res);
     const admin = await getUserByToken(userToken, req, res);
 
     if(!userId) {

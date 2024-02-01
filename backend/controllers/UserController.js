@@ -44,7 +44,7 @@ module.exports = class UserController {
       expiration
     }
 
-    const userToken = await getToken(req);
+    const userToken = await getToken(req, res);
     const user = await getUserByToken(userToken, req, res);
 
     await Product.create(product)
@@ -183,7 +183,7 @@ module.exports = class UserController {
       }
     }
 
-    const userToken = await getToken(req);
+    const userToken = await getToken(req, res);
     const user = await getUserByToken(userToken, req, res);
 
     await Product.update(putProduct, { where: { id: parseFloat(product) } })
@@ -215,7 +215,7 @@ module.exports = class UserController {
       return;
     }
 
-    const userToken = await getToken(req);
+    const userToken = await getToken(req, res);
     const user = await getUserByToken(userToken, req, res);
 
     await Product.destroy({ where: { id: parseFloat(product) } })
@@ -269,7 +269,7 @@ module.exports = class UserController {
       return;
     }
 
-    const userToken = await getToken(req);
+    const userToken = await getToken(req, res);
     const user = await getUserByToken(userToken, req, res);
 
     try {
@@ -314,7 +314,7 @@ module.exports = class UserController {
   }
 
   static async logout(req, res) {
-    const userToken = await getToken(req);
+    const userToken = await getToken(req, res);
     const user = await getUserByToken(userToken, req, res) || null;
 
     if(!user) {

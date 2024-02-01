@@ -2,6 +2,7 @@ const port = 3001;
 
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     maxAge: 3600
 }));
+app.use(cookieParser());
 
 // database
 const conn = require('./db/conn');
