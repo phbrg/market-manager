@@ -10,6 +10,8 @@ const createUserToken = async(user, req, res) => {
   res.cookie('token', token, {
     httpOnly: true,
     secure: true,
+    sameSite: 'none',
+    maxAge: 604800000 // 1 week
   });
   
   res.status(200).json({ message: 'User successfully authenticated.' });
