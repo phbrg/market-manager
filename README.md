@@ -25,15 +25,11 @@ To run the backend api you need:
 
 First you need to clone the project using:
 
-<code>
-git clone https://github.com/phbrg/market-manager.git
-</code>
+<code> git clone https://github.com/phbrg/market-manager.git </code>
 
 After clone run:
 
-<code>
-npm i
-</code>
+<code> npm i </code>
 
 to install the dependencies
 
