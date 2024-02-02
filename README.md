@@ -46,9 +46,7 @@ JWT_KEY= # project jwt secret key
 
 Then you can run
 
-<code>
-npm start
-</code>
+<code> npm start </code>
 
 After all the app should run, if not you can contact me.
 
