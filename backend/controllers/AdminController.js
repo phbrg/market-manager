@@ -81,29 +81,39 @@ module.exports = class AdminController {
       param2 = req.params.param2 || null;
     }
 
-    let response;
+    let response = [];
     let status;
 
     switch(param1) {
       case 'employee':
-        response = await User.findAll({ raw: true, where: { role: 'EMPLOYEE' } }) || null;
-        status = 200;
-        break;
-      case 'id': 
-        if(!param2) {
-          response = 'Invalid search.';
-          status = 404;
-        } else {
-          response = await User.findAll({ raw: true, where: { id: parseFloat(param2) } }) || null;
-          status = 200;
+        let users = await User.findAll({ raw: true, where: { role: 'EMPLOYEE' } }) || null;
+        for(let user of users) {
+          let noPasswordUser = {
+            id: user.id,
+            name: user.name,
+            login: user.login,
+            role: user.role,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+          }
+          response.push(noPasswordUser);
         }
+        status = 200;
         break;
       case 'name':
         if(!param2) {
           response = 'Invalid search.';
           status = 404;
         } else {
-          response = await User.findAll({ raw: true, where: { name: param2.toLowerCase() } }) || null;
+          let user = await User.findOne({ raw: true, where: { name: param2.toLowerCase() } }) || null;
+          response = {
+            id: user.id,
+            name: user.name,
+            login: user.login,
+            role: user.role,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+          }
           status = 200;
         }
         break;
@@ -112,12 +122,31 @@ module.exports = class AdminController {
           response = 'Invalid search.';
           status = 404;
         } else {
-          response = await User.findAll({ raw: true, where: { login: param2.toLowerCase() } }) || null;
+          let user = await User.findOne({ raw: true, where: { login: param2.toLowerCase() } }) || null;
+          response = {
+            id: user.id,
+            name: user.name,
+            login: user.login,
+            role: user.role,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+          }
           status = 200;
         }
         break;
       default:
-        response = await User.findAll({ raw: true }) || null;
+        let users2 = await User.findAll({ raw: true }) || null;
+        for(let user of users2) {
+          let noPasswordUser = {
+            id: user.id,
+            name: user.name,
+            login: user.login,
+            role: user.role,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+          }
+          response.push(noPasswordUser);
+        }
         status = 200;
     }
 
@@ -279,15 +308,6 @@ module.exports = class AdminController {
       case 'delete':
         response = await Log.findAll({ raw: true, where: { category: 'DELETE' } }) || null;
         status = 200;
-        break;
-      case 'id': 
-        if(!param2) {
-          response = 'Invalid search.';
-          status = 404;
-        } else {
-          response = await Log.findAll({ raw: true, where: { id: parseFloat(param2) } }) || null;
-          status = 200;
-        }
         break;
       case 'userid': 
         if(!param2) {

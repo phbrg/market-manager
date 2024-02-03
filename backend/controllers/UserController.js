@@ -83,15 +83,6 @@ module.exports = class UserController {
         response = await Product.findAll({ raw: true, where: { amount: 0 } }) || null;
         status = 200;
         break;
-      case 'id': 
-        if(!param2) {
-          response = 'Invalid search.';
-          status = 404;
-        } else {
-          response = await Product.findAll({ raw: true, where: { id: parseFloat(param2) } }) || null;
-          status = 200;
-        }
-        break;
       case 'name': 
         if(!param2) {
           response = 'Invalid search.';
@@ -112,7 +103,7 @@ module.exports = class UserController {
         break;
       case 'unexpired': 
         const productsUnexpired = await Product.findAll({ raw: true }) || null;
-        for(const product of productsExpired) {
+        for(const product of productsUnexpired) {
           if(new Date(product.expiration) > new Date()) {
             response.push(product);
           }
