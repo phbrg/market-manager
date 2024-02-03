@@ -89,7 +89,6 @@ After all the app should run, if not you can contact me.
 	- <code>/</code>: get all products.
 	- <code>in-stock</code>: get all in stock products.
 	- <code>out-of-stock</code>: get all unavaliable products.
-	- <code>id/id</code>: get the product by id.
 	- <code>name/name</code>: get the product by name.
 	- <code>expired</code>: get all expired products.
 	- <code>unexpired</code>: get all unexpired products.
@@ -233,7 +232,6 @@ After all the app should run, if not you can contact me.
 	- parameters:
 	- <code>/</code>: get all users.
 	- <code>employee</code>: get all users with employee role.
-	- <code>id/id</code>: get the users by id.
 	- <code>name/name</code>: get the user by name.
 	- <code>login/login</code>: get the user by login.
 - Method: <code>GET</code>
@@ -291,7 +289,6 @@ After all the app should run, if not you can contact me.
 	- <code>create</code>: get all logs with CREATE category.
 	- <code>update</code>: get all logs with UPDATE category.
 	- <code>delete</code>: get all logs with DELETE category.
-	- <code>id/id</code>: get logs by id.
 	- <code>userid/id</code>: get logs by user id.
 - Method: <code>GET</code>
 - Response:
