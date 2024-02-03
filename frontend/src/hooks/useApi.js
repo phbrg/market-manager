@@ -13,7 +13,12 @@ const useApi = (url, method, body = null) => {
         'Accept': 'application/json',
       }
 
-      const response = await fetch(url, { method, body: JSON.stringify(body), headers });
+      let response;
+      if(body) {
+        response = await fetch(url, { method, body: JSON.stringify(body), headers });
+      } else {
+        response = await fetch(url, { method, headers });
+      }
       const data = await response.json();
 
       if(!response.ok) {

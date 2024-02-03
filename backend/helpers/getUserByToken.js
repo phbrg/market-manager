@@ -5,7 +5,7 @@ const User = require('../models/User');
 
 const getUserByToken = async (token, req, res) => {
   if(!token) {
-    res.status(401).json({ error: 'Access denied.' });
+    res.status(401).json({ message: 'Access denied.' });
     return;
   }
   

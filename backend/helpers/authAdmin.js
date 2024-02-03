@@ -6,7 +6,7 @@ const getUserByToken = require('./getUserByToken');
 const authAdmin = async (req, res, next) => {
   const token = req.cookies.token;
   if(!token) {
-    res.status(401).json({ error: 'Access denied.' });
+    res.status(401).json({ message: 'Access denied.' });
     return;
   }
 
@@ -19,12 +19,12 @@ const authAdmin = async (req, res, next) => {
     if(user.role == 'BOSS' || user.role == 'MANAGER') {
       next();
     } else {
-      res.status(401).json({ error: 'Access denied.' });
+      res.status(401).json({ message: 'Access denied.' });
       return;
     }
 
   } catch(err) {
-    res.status(400).json({ error: 'Invalid token.' });
+    res.status(400).json({ message: 'Invalid token.' });
     return;
   }
 }

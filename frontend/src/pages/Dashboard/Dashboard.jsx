@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
-
 import Cookies from 'js-cookie';
 
-import useApi from '../../hooks/useApi'
+import useApi from '../../hooks/useApi';
 
 import './Dashboard.css'
 
-const Dashboard = async () => {
+const Dashboard = () => {
   const isLogged = Cookies.get('logged') || null;
 
   if(!isLogged || isLogged == '0') {
@@ -16,11 +15,17 @@ const Dashboard = async () => {
   const { data, error, loading, fetchData } = useApi(`${import.meta.env.VITE_API_URL}/products`, 'GET');
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    const fetchAsyncData = async () => {
+      await fetchData();
+    };
 
-  console.log(data, error);
+    fetchAsyncData();
+  }, []);
 
+  useEffect(() => {
+    console.log(data, error);
+  }, [data, error])
+  
   return (
     <section className='Dashboard'>
       <h1>Hello world</h1>
@@ -28,4 +33,4 @@ const Dashboard = async () => {
   )
 }
 
-export default Dashboard
+export default Dashboard;
