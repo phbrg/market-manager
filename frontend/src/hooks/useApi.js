@@ -15,9 +15,9 @@ const useApi = (url, method, body = null) => {
 
       let response;
       if(body) {
-        response = await fetch(url, { method, body: JSON.stringify(body), headers });
+        response = await fetch(url, { method, body: JSON.stringify(body), headers, credentials: 'include' });
       } else {
-        response = await fetch(url, { method, headers });
+        response = await fetch(url, { method, headers, credentials: 'include' });
       }
       const data = await response.json();
 

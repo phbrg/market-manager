@@ -8,10 +8,11 @@ const createUserToken = async(user, req, res) => {
   }, process.env.JWT_KEY);
 
   res.cookie('token', token, {
-    httpOnly: true,
-    secure: true,
+    httpOnly: false,
+    secure: false,
     sameSite: 'none',
-    maxAge: 604800000 // 1 week
+    maxAge: 604800000, // 1 week
+    path: '/'
   });
   
   res.status(200).json({ message: 'You are successfully authenticated.' });

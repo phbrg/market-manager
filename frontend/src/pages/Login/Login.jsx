@@ -24,7 +24,17 @@ const Login = () => {
   useEffect(() => {
     if(data) {
       Cookies.set('logged', 1, { expires: 1 });
-      window.location.href = '/';
+
+      async function teste() {
+        await fetch(`${import.meta.env.VITE_API_URL}/products`, { method: 'GET', headers: { 'Content-Type': 'application/json' }, credentials: 'include', })
+          .then((data) => {
+            console.log(JSON.stringify(data));
+          }).catch((err) => console.log(err))
+      }
+
+      teste();
+
+      // window.location.href = '/';
     }
   }, [data, error]);
 
