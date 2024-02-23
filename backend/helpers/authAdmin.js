@@ -2,9 +2,10 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 const getUserByToken = require('./getUserByToken');
+const getToken = require('./getToken');
 
 const authAdmin = async (req, res, next) => {
-  const token = req.cookies.token;
+  const token = getToken(req);
   if(!token) {
     res.status(401).json({ message: 'Access denied.' });
     return;
