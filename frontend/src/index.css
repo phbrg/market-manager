@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--text);
+  border-radius: 1000px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--lgray);
+  cursor: pointer;
+}
+
+* {
+  border: none;
+  box-shadow: none;
+  box-sizing: border-box;
+  font-style: normal;
+  font-family: Rubik;
+  margin: 0;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  resize: none;
+  outline: none;
+  border: 0;
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  cursor: default;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+:root {
+  --bg: #0e0d11;
+  --text: rgb(255, 255, 255);
+  --lgray: #b0adc0;
+  --gray: #474554;
+  --dgray: #26252d;
+  --blue: #4867e6;
+}
+
+.toast {
+  color: #111;
+  font-size: 1vw;
+  font-weight: 500;
+}
+
+section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+  .toast {
+    font-size: 1.4vh;
+  }
+}
