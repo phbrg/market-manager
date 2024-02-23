@@ -303,4 +303,15 @@ module.exports = class UserController {
         res.status(500).json({ message: 'Internal server error, try again later.' });
       })
   }
+
+  static async getPersonalInformation(req, res) {
+    const userToken = getToken(req) || null;
+    if(!userToken) {
+      res.status(404).json({ message: 'An error has occurred, try again later.' });
+      return;
+    }
+    const user = getUserByToken(userToken, req, res);
+
+    res.status(200).json({ message: user });
+  }
 }

@@ -12,7 +12,15 @@ const getUserByToken = async (token, req, res) => {
   const decoded = jwt.verify(token, process.env.JWT_KEY);
   const userId = decoded.id; 
 
-  const user = await User.findOne({ raw: true, where: { id: userId } });
+  const userOnDatabase = await User.findOne({ raw: true, where: { id: userId } });
+  const user = {
+    id: userOnDatabase.id,
+    name: userOnDatabase.name,
+    login: userOnDatabase.login,
+    role: userOnDatabase.role,
+    createdAt: userOnDatabase.createdAt,
+    updatedAt: userOnDatabase.updatedAt,
+  }
 
   return user;
 }
