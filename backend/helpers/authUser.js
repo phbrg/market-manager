@@ -1,6 +1,8 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
+const getToken = require('./getToken');
+
 const authUser = (req, res, next) => {
   const token = getToken(req);
   if(!token) {

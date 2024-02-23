@@ -36,7 +36,7 @@ export const Login = () => {
         <Input text='Login:' type='text' name='login' placeholder='Your login' handle={handleOnChange} />
         <Input text='Password:' type='password' name='password' placeholder='Your password' handle={handleOnChange} />
         {
-          error && <p className="error">{error}</p>
+          error && <p className="form-error">{error}</p>
         }
         <Button text='Login'/>
       </form>

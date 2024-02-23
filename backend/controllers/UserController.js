@@ -116,7 +116,7 @@ module.exports = class UserController {
     }
 
     if(response == [] || response.length == 0 || response == '' || response == null) {
-      response = "Couldn't find your product.";
+      response = "Couldn't find any product.";
       status = 404;
     }
 
@@ -305,12 +305,12 @@ module.exports = class UserController {
   }
 
   static async getPersonalInformation(req, res) {
-    const userToken = getToken(req) || null;
+    const userToken = getToken(req, res) || null;
     if(!userToken) {
       res.status(404).json({ message: 'An error has occurred, try again later.' });
       return;
     }
-    const user = getUserByToken(userToken, req, res);
+    const user = await getUserByToken(userToken, req, res);
 
     res.status(200).json({ message: user });
   }
