@@ -228,7 +228,7 @@ After all the app should run, if not you can contact me.
 	```
 
 #### Get users
-- Route: <code>/products/parameter1/parameter2</code>
+- Route: <code>/users/parameter1/parameter2</code>
 	- parameters:
 	- <code>/</code>: get all users.
 	- <code>employee</code>: get all users with employee role.
@@ -244,7 +244,6 @@ After all the app should run, if not you can contact me.
 				"id":  1,
 				"name":  "name",
 				"login":  "login",
-				"password":  "encyptedpassword",
 				"role":  "ROLE",
 				"createdAt":  "2024-01-01T00:00:00.000Z",
 				"updatedAt":  "2024-01-01T00:00:00.000Z"

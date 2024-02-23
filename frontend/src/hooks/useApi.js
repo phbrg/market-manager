@@ -1,6 +1,8 @@
+import Cookies from 'js-cookie';
+
 import { useState } from 'react';
 
-const useApi = (url, token = null, method, body = null) => {
+const useApi = (url, method, body = null) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -14,6 +16,7 @@ const useApi = (url, token = null, method, body = null) => {
         'Accept': 'application/json',
       };
 
+      const token = Cookies.get('token') || null;
       if (token) {
         headers.Authorization = `Bearer ${token}`;
       }
@@ -24,13 +27,16 @@ const useApi = (url, token = null, method, body = null) => {
           method,
           body: JSON.stringify(body),
           headers,
-          credentials: 'include',
         });
       } else {
-        response = await fetch(url, { method, headers, credentials: 'include' });
+        response = await fetch(url, { method, headers });
       }
 
       const responseData = await response.json();
+      
+      if(responseData.token) {
+        Cookies.set('token', responseData.token, { expires: 7 }); // a week
+      }
 
       if (!response.ok) {
         setError(responseData.message);
