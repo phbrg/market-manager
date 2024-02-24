@@ -41,8 +41,8 @@ body {
 }
 
 :root {
-  --bg: #0e0d11;
-  --text: rgb(255, 255, 255);
+  --bg: #fff;
+  --text: #111;
   --lgray: #b0adc0;
   --gray: #474554;
   --dgray: #26252d;

@@ -92,6 +92,15 @@ module.exports = class UserController {
           status = 200;
         }
         break;
+      case 'id': 
+        if(!param2) {
+          response = 'Invalid search.';
+          status = 404;
+        } else {
+          response = await Product.findOne({ raw: true, where: { id: parseFloat(param2) } }) || null;
+          status = 200;
+        }
+        break;
       case 'expired': 
         const productsExpired = await Product.findAll({ raw: true });
         for(const product of productsExpired) {
@@ -115,7 +124,7 @@ module.exports = class UserController {
         status = 200;
     }
 
-    if(response == [] || response.length == 0 || response == '' || response == null) {
+    if(!response || response == [] || response.length == 0 || response == '' || response == null) {
       response = "Couldn't find any product.";
       status = 404;
     }

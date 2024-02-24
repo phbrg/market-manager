@@ -1,18 +1,19 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom'
 
 import useApi from '../../hooks/useApi'
 
-import './Home.css'
+import './Dashboard.css'
 
-export const Home = () => {
+export const Dashboard = () => {
   const token = Cookies.get('token') || null;
   if (!token) {
     window.location.href = '/login';
   }
 
   const { data: user, error: userError, loading: userLoading, fetchData: userFetch } = useApi(`${import.meta.env.VITE_API_URL}/personal`, 'GET');
-  const { data: products, error: productsError, loading, fetchData: productsFetch } = useApi(`${import.meta.env.VITE_API_URL}/products`, 'GET');
+  const { data: products, error: productsError, loading: productLoading, fetchData: productsFetch } = useApi(`${import.meta.env.VITE_API_URL}/products`, 'GET');
 
   const renderFetch = async () => {
     await userFetch();
@@ -23,18 +24,17 @@ export const Home = () => {
     renderFetch();
   }, [])
 
-  useEffect(() => {
-    console.log(products, productsError);
-  }, [products, productsError])
+  // useEffect(() => {
+  //   console.log(products, productsError);
+  // }, [products, productsError])
 
   return (
     <section>
-      <a href="/addproduct">add product</a>
       {
         user && <h1>Welcome, {user.name}</h1>
       }
       {
-        productsError && <p>{productsError}</p>
+        userLoading || productLoading && <div className="loader"></div>
       }
       {
         products && products.map((product, key) => (
@@ -44,7 +44,7 @@ export const Home = () => {
             <p>${product.price}</p>
             <p>AMT. {product.amount}</p>
             <p>EXP. {product.expiration}</p>
-            <a href={`/product/${product.id}`}>Edit product</a>
+            <NavLink to={`/product/${product.id}`}>Edit product</NavLink>
           </div>
         ))
       }

@@ -193,17 +193,6 @@ After all the app should run, if not you can contact me.
 	}
 	```
 
-#### Logout
-- Route: <code>/logout</code>
-- Method: <code>GET</code>
-- Response:
-	- Status: <code>200</code>
-	```JSON
-	{
-		"message":  "You logout successfully."
-	}
-	```
-
 ### Admin user
 
 #### Register user
