@@ -8,6 +8,7 @@ router.post('/login', UserController.login);
 router.get('/personal', authUser, UserController.getPersonalInformation);
 
 router.post('/registersale', authUser, UserController.registerSale);
+router.get('/sales/:param1?/:param2?', authUser, UserController.getSales);
 
 router.post('/registerproduct', authUser, UserController.registerProduct);
 router.get('/products/:param1?/:param2?', authUser, UserController.getProducts);

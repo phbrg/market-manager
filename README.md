@@ -175,6 +175,35 @@ After all the app should run, if not you can contact me.
 	}
 	```
 
+#### Get products
+- Route: <code>/sales/parameter1/parameter2</code>
+	- parameters:
+	- <code>/</code>: get all sales.
+	- <code>total</code>: get sale by total.
+	- <code>date</code>: get sale by date.
+- Method: <code>GET</code>
+- Response:
+	- Status: <code>200</code>
+	```JSON
+	{
+    "message": "Sale successfully registered.",
+    "sale": {
+        "id": 1,
+        "products": [
+            {
+                "id": 99,
+                "amount": 99
+            },
+						...
+        ],
+        "total": 999.9,
+        "UserId": 1,
+        "updatedAt": "2024-01-01T00:00:00.000Z",
+        "createdAt": "2024-01-01T00:00:00.000Z"
+    }
+	}
+	```
+
 #### Login
 - Route: <code>/login</code>
 - Method: <code>POST</code>

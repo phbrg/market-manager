@@ -272,6 +272,7 @@ module.exports = class UserController {
     const userToken = await getToken(req, res);
     const user = await getUserByToken(userToken, req, res);
 
+    let total = 0;
     try {
       for (const product of products) {
         const productOnDatabase = await Product.findOne({ raw: true, where: { id: parseFloat(product.id) } }) || null;
@@ -284,6 +285,7 @@ module.exports = class UserController {
         }
         
         const newAmount = productOnDatabase.amount - product.amount;
+        total = total + (productOnDatabase.price * product.amount);
 
         try {
           await Product.update({ amount: newAmount }, { where: { id: product.id }});
@@ -299,7 +301,13 @@ module.exports = class UserController {
       return;
     } 
 
-    await Sale.create({ products, UserId: parseFloat(user.id) })
+    const sale = {
+      products,
+      total,
+      UserId: parseFloat(user.id)
+    }
+
+    await Sale.create(sale)
       .then(async (sale) => {
         try {
           await createLog('CREATE', `New sale registered in database.`, user.id);
@@ -322,5 +330,65 @@ module.exports = class UserController {
     const user = await getUserByToken(userToken, req, res);
 
     res.status(200).json({ message: user });
+  }
+
+  static async getSales(req, res) {
+    let param1 = null;
+    let param2 = null;
+
+    if(req.params) {
+      param1 = req.params.param1;
+      param2 = req.params.param2 || null;
+    }
+
+    let response = [];
+    let status;
+
+    switch(param1) {
+      case 'id': 
+        if(!param2) {
+          response = 'Invalid search.';
+          status = 404;
+        } else {
+          response = await Sale.findOne({ raw: true, where: { id: parseFloat(param2) } }) || null;
+          status = 200;
+        }
+        break;
+      case 'total': 
+        if(!param2) {
+          response = 'Invalid search.';
+          status = 404;
+        } else {
+          response = await Sale.findOne({ raw: true, where: { total: parseFloat(param2) } }) || null;
+          status = 200;
+        }
+        break;
+      case 'date': 
+        if(!param2) {
+          response = 'Invalid search.';
+          status = 404;
+        } else {
+          let date;
+          try {
+            date = new Date(param2);
+          } catch(err) {
+            res.status(422).json({ message: 'Invalid date.' });
+            return;
+          }
+          response = await Sale.findOne({ raw: true, where: { createdAt: date } }) || null;
+          status = 200;
+        }
+        break;
+      default:
+        response = await Sale.findAll({ raw: true }) || null;
+        status = 200;
+    }
+
+    if(!response || response == [] || response.length == 0 || response == '' || response == null) {
+      response = "Couldn't find any sale.";
+      status = 404;
+    }
+
+    res.status(status).json({ message: response });
   }
 }

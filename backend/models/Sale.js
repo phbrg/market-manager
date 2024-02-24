@@ -8,6 +8,10 @@ const Sale = db.define('Sale', {
         type: DataTypes.ARRAY(DataTypes.JSONB),
         allowNull: false
     },
+    total: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    }
 });
 
 Sale.belongsTo(User);
