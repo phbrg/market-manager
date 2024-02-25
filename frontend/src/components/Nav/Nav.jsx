@@ -9,12 +9,19 @@ import useApi from '../../hooks/useApi'
 import './Nav.css'
 
 export const Nav = () => {
+  const token = Cookies.get('token') || null;
+  if (!token) {
+    return (
+      <></>
+    )
+  }
+
   const { data: user, error: userError, loading: userLoading, fetchData: userFetch } = useApi(`${import.meta.env.VITE_API_URL}/personal`, 'GET');
 
   const renderFetch = async () => {
     await userFetch();
   }
-
+  
   useEffect(() => {
     renderFetch();
   }, []);
@@ -32,6 +39,7 @@ export const Nav = () => {
     Cookies.remove('token');
     window.location.href = '/login';
   }
+  
   return (
     <nav>
       {

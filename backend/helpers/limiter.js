@@ -8,4 +8,4 @@ const limiter = rateLimit({
   }
 });
 
-app.use(limiter);
+module.exports = limiter;

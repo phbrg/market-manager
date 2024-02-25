@@ -4,6 +4,8 @@ const express = require('express');
 const cors = require('cors');
 // const cookieParser = require('cookie-parser');
 
+const limiter = require('./helpers/limiter');
+
 const app = express();
 
 app.use(express.json());
@@ -15,6 +17,7 @@ app.use(cors({
     maxAge: 3600,
 }));
 // app.use(cookieParser());
+app.use(limiter);
 
 const conn = require('./db/conn');
 
