@@ -175,7 +175,41 @@ After all the app should run, if not you can contact me.
 	}
 	```
 
-#### Get products
+#### Update sale
+- Route: <code>/editsale/id</code>
+- Method: <code>PUT</code>
+- Body:
+```JSON
+{
+	"products":  [
+		{
+			"id": 99,
+			"amount": 99
+		},
+		...
+	]
+}
+```
+- Response:
+	- Status: <code>200</code>
+	```JSON
+	{
+		"message":  "Sale successfully updated."
+	}
+	```
+
+#### Delete sale
+- Route: <code>/deletesale/id</code>
+- Method: <code>DELETE</code>
+- Response:
+	- Status: <code>200</code>
+	```JSON
+	{
+		"message":  "Sale successfully deleted."
+	}
+	```
+
+#### Get sales
 - Route: <code>/sales/parameter1/parameter2</code>
 	- parameters:
 	- <code>/</code>: get all sales.
