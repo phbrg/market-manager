@@ -1,7 +1,7 @@
 import './Button.css'
 
-export const Button = ({ text, handle = null }) => {
+export const Button = ({ text, handle = null, value = null }) => {
   return (
-    <button onClick={handle ? handle : null}>{text}</button>
+    <button value={value ? value : null} onClick={handle ? handle : null}>{text}</button>
   )
 }

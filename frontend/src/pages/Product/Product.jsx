@@ -16,15 +16,16 @@ export const Product = () => {
   }
 
   const { id } = useParams();
-  const { data: product, error: productError, loading: productLoading, fetchData: productFetch } = useApi(`${import.meta.env.VITE_API_URL}/products/id/${id}`, 'GET');
-
-  const renderFetch = async () => {
-    await productFetch();
-  }
+  const { data: productGet, error: productError, loading: productLoading, fetchData: productFetch } = useApi(`${import.meta.env.VITE_API_URL}/products/id/${id}`, 'GET');
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    renderFetch();
+    if(!product) productFetch();
   }, []);
+
+  useEffect(() => {
+    if(productGet) setProduct(productGet);
+  }, [productGet])
 
   useEffect(() => {
     if(productError) {
@@ -63,7 +64,7 @@ export const Product = () => {
       {
         product && 
         <form onSubmit={handleSubmit}>
-          <p>{product.id}</p>
+          <p>ID: {product.id}</p>
           <Input text='Name:' type='text' name='name' placeholder={product.name} handle={handleOnChange} />
           <Input text='Price:' type='number' name='price' placeholder={product.price} handle={handleOnChange} />
           <Input text='Amount:' type='number' name='amount' placeholder={product.amount} handle={handleOnChange} />

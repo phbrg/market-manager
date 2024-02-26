@@ -17,7 +17,7 @@ app.use(cors({
     maxAge: 3600,
 }));
 // app.use(cookieParser());
-app.use(limiter);
+// app.use(limiter);
 
 const conn = require('./db/conn');
 

@@ -54,29 +54,40 @@ export const Dashboard = () => {
       {
         user && <h1>Hello {user.name}, welcome!</h1>
       }
-      {
-        error && <p>{error}</p>
-      }
       <Button text='View products' handle={handleShowProducts}/>
       <Button text='View sales' handle={handleShowSales}/>
       {
-        products && products.map((product, key) => (
-          <Card key={key} elements={[
-            `ID: ${product.id}`,
-            `${product.name}`,
-            `$${product.price}`,
-            `AMT. ${product.amount}`,
-            `EXP. ${new Date(product.expiration).toLocaleDateString()}`,
-          ]}
-          edit={`/product/${product.id}`}
-          />
-        ))
+        error && <p>{error}</p>
       }
-      {
-        sales && sales.map((sale, key) => (
-          <p key={key}>{sale}</p>
-        ))
-      }
+      <div>
+        {
+          products && products.map((product, key) => (
+            <Card key={key} elements={[
+              `ID: ${product.id}`,
+              `${product.name}`,
+              `$${product.price}`,
+              `AMT. ${product.amount}`,
+              `EXP. ${new Date(product.expiration).toLocaleDateString()}`,
+            ]}
+            link={`/product/${product.id}`}
+            />
+          ))
+        }
+        {
+          sales && sales.map((sale, key) => (
+            <Card key={key} elements={[
+              `ID: ${sale.id}`,
+              `Products: ${
+                sale.products.map((product) => (
+                  `[ ID: ${product.id} | AMT. ${product.amount} ]` 
+                ))
+              }`,
+              `$${sale.total}`
+            ]}
+            link={`/sale/${sale.id}`} />
+          ))
+        }
+      </div>
     </section>
   )
 }

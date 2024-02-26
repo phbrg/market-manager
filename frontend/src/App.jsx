@@ -3,6 +3,7 @@ import { Toaster } from 'sonner'
 
 import { Dashboard } from './pages/Dashboard/Dashboard'
 import { Product } from './pages/Product/Product'
+import { Sale } from './pages/Sale/Sale'
 import { Login } from './pages/Login/Login'
 import { NotFound } from './pages/NotFound/NotFound'
 
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/product/:id" element={<Product />} />
+          <Route path="/sale/:id" element={<Sale />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />}/>
         </Routes>
