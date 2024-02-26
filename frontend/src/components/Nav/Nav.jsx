@@ -16,15 +16,16 @@ export const Nav = () => {
     )
   }
 
-  const { data: user, error: userError, loading: userLoading, fetchData: userFetch } = useApi(`${import.meta.env.VITE_API_URL}/personal`, 'GET');
-
-  const renderFetch = async () => {
-    await userFetch();
-  }
+  const { data: userGet, error: userError, loading: userLoading, fetchData: userFetch } = useApi(`${import.meta.env.VITE_API_URL}/personal`, 'GET');
+  const [user, setUser] = useState(null);
   
   useEffect(() => {
-    renderFetch();
+   if(!user) userFetch();
   }, []);
+
+  useEffect(() => {
+    if(userGet) setUser(userGet);
+  }, [userGet])
 
   const [admin, setAdmin] = useState(false);
   useEffect(() => {
@@ -35,7 +36,7 @@ export const Nav = () => {
     }
   }, [user]);
 
-  const handleLogout = (e) => {
+  const handleLogout = () => {
     Cookies.remove('token');
     window.location.href = '/login';
   }

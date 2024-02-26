@@ -1,6 +1,8 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom'
+
+import { Card } from '../../components/Card/Card';
+import { Button } from '../../components/Button/Button';
 
 import useApi from '../../hooks/useApi'
 
@@ -12,40 +14,67 @@ export const Dashboard = () => {
     window.location.href = '/login';
   }
 
-  const { data: user, error: userError, loading: userLoading, fetchData: userFetch } = useApi(`${import.meta.env.VITE_API_URL}/personal`, 'GET');
-  const { data: products, error: productsError, loading: productLoading, fetchData: productsFetch } = useApi(`${import.meta.env.VITE_API_URL}/products`, 'GET');
-
-  const renderFetch = async () => {
-    await userFetch();
-    await productsFetch();
-  }
+  const { data: userGet, error: userError, loading: userLoading, fetchData: userFetch } = useApi(`${import.meta.env.VITE_API_URL}/personal`, 'GET');
+  const { data: productsGet, error: productsError, loading: productsLoading, fetchData: productsFetch } = useApi(`${import.meta.env.VITE_API_URL}/products`, 'GET');
+  const { data: salesGet, error: salesError, loading: salesLoading, fetchData: salesFetch } = useApi(`${import.meta.env.VITE_API_URL}/sales`, 'GET');
   
   useEffect(() => {
-    renderFetch();
-  }, [])
+    if(!user) userFetch();
+    if(!products) productsFetch();
+    if(!sales) salesFetch();
+  }, []);
 
-  // useEffect(() => {
-  //   console.log(products, productsError);
-  // }, [products, productsError])
+  const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
+  const [products, setProducts] = useState(null);
+  const [sales, setSales] = useState(null);
+
+  const handleShowProducts = () => {
+    productsError ? setError(productsError) : setError(null);
+    setSales(null);
+    if(productsGet) setProducts(productsGet);
+  }
+
+  const handleShowSales = () => {
+    salesError ? setError(salesError) : setError(null);
+    setProducts(null);
+    if(salesGet) setSales(salesGet);
+  }
+
+  useEffect(() => {
+    if(userGet) setUser(userGet);
+    if(userError) setError(userError);
+  }, [userGet, userError])
 
   return (
-    <section>
+    <section className='Dashboard'>
       {
-        user && <h1>Welcome, {user.name}</h1>
+        userLoading || productsLoading && <div className="loader"></div>
       }
       {
-        userLoading || productLoading && <div className="loader"></div>
+        user && <h1>Hello {user.name}, welcome!</h1>
       }
+      {
+        error && <p>{error}</p>
+      }
+      <Button text='View products' handle={handleShowProducts}/>
+      <Button text='View sales' handle={handleShowSales}/>
       {
         products && products.map((product, key) => (
-          <div className='product-card' key={key}>
-            <p>ID: {product.id}</p>
-            <p>{product.name}</p>
-            <p>${product.price}</p>
-            <p>AMT. {product.amount}</p>
-            <p>EXP. {product.expiration}</p>
-            <NavLink to={`/product/${product.id}`}>Edit product</NavLink>
-          </div>
+          <Card key={key} elements={[
+            `ID: ${product.id}`,
+            `${product.name}`,
+            `$${product.price}`,
+            `AMT. ${product.amount}`,
+            `EXP. ${new Date(product.expiration).toLocaleDateString()}`,
+          ]}
+          edit={`/product/${product.id}`}
+          />
+        ))
+      }
+      {
+        sales && sales.map((sale, key) => (
+          <p key={key}>{sale}</p>
         ))
       }
     </section>

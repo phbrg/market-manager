@@ -56,7 +56,7 @@ export const Product = () => {
   }
 
   return (
-    <section>
+    <section className='Product'>
       {
         productLoading || deleteLoading || updateLoading && <div className="loader"></div>
       }

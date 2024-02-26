@@ -2,7 +2,7 @@ import './NotFound.css'
 
 export const NotFound = () => {
   return (
-    <section>
+    <section className='NotFound'>
       <h1>404</h1>
     </section>
   )

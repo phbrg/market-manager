@@ -28,7 +28,7 @@ export const Login = () => {
   }, [data])
 
   return (
-    <section>
+    <section className='Login'>
       {
         loading && <div className='loader'></div>
       }
