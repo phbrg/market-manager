@@ -7,6 +7,7 @@ import { Button } from '../../components/Button/Button';
 import useApi from '../../hooks/useApi'
 
 import './Dashboard.css'
+import { NavLink } from 'react-router-dom';
 
 export const Dashboard = () => {
   const token = Cookies.get('token') || null;
@@ -62,8 +63,12 @@ export const Dashboard = () => {
       {
         user && <h1>Hello {user.name}, welcome!</h1>
       }
-      <Button text='View products' handle={handleShowProducts}/>
-      <Button text='View sales' handle={handleShowSales}/>
+      <div>
+        <Button text='View products' handle={handleShowProducts}/>
+        <Button text='View sales' handle={handleShowSales}/>
+        <NavLink to='/registersale'>Register sale</NavLink>
+        <NavLink to='/registerproduct'>Register products</NavLink>
+      </div>
       {
         error && <p>{error}</p>
       }

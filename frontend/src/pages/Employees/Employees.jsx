@@ -5,9 +5,9 @@ import { Card } from '../../components/Card/Card';
 
 import useApi from '../../hooks/useApi';
 
-import './Logs.css'
+import './Employees.css'
 
-export const Logs = () => {
+export const Employees = () => {
   const token = Cookies.get('token') || null;
   if (!token) {
     window.location.href = '/login';
@@ -15,37 +15,37 @@ export const Logs = () => {
 
   const { data: userGet, error: userError, loading: userLoading, fetchData: userFetch } = useApi(`${import.meta.env.VITE_API_URL}/personal`, 'GET');
   const [user, setUser] = useState(null);
-  const { data: logsGet, error: logsError, loading: logsLoading, fetchData: logsFetch } = useApi(`${import.meta.env.VITE_API_URL}/admin/logs`, 'GET');
-  const [logs, setLogs] = useState(null);
+  const { data: employeesGet, error: employeesError, loading: employeesLoading, fetchData: employeesFetch } = useApi(`${import.meta.env.VITE_API_URL}/admin/users`, 'GET');
+  const [employees, setEmployees] = useState(null);
 
   useEffect(() => {
     if(!user) userFetch();
-    if(!logs) logsFetch();
+    if(!employees) employeesFetch();
   }, [])
 
   useEffect(() => {
     if(userGet && user == null) setUser(userGet);
-    if(logsGet && logs == null) setLogs(logsGet);
+    if(employeesGet && employees == null) setEmployees(employeesGet);
     if(userGet) {
       if(userGet.role == 'BOSS' || userGet.role == 'MANAGER') {
       } else {
         window.location.href = '/error'
       }
     }
-  }, [userGet, logsGet]);
+  }, [userGet, employeesGet]);
 
   return (
-    <section className='Logs'>
-      <h1>Logs</h1>
+    <section className='Employees'>
+      <h1>Employees</h1>
       <div>
         {
-          logs && logs.map((log, key) => (
+          employees && employees.map((employee, key) => (
             <Card key={key} elements={[
-              `ID: ${log.id}`,
-              `Category: ${log.category}`,
-              log.message,
-              `${new Date(log.createdAt).toLocaleDateString()}`
-            ]}/>
+              `ID: ${employee.id}`,
+              employee.name,
+              `Login: ${employee.login}`,
+              `Role: ${employee.role}`
+            ]} link={`/user/${employee.login}`}/>
           ))
         }
       </div>
