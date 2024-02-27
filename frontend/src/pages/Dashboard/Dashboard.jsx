@@ -44,7 +44,15 @@ export const Dashboard = () => {
   useEffect(() => {
     if(userGet) setUser(userGet);
     if(userError) setError(userError);
-  }, [userGet, userError])
+  }, [userGet, userError]);
+
+  const calculateTotalProducts = (sale) => {
+    let total = 0;
+    for(let product of sale.products) {
+      total = total + product.amount;
+    }
+    return total;
+  }
 
   return (
     <section className='Dashboard'>
@@ -77,11 +85,7 @@ export const Dashboard = () => {
           sales && sales.map((sale, key) => (
             <Card key={key} elements={[
               `ID: ${sale.id}`,
-              `Products: ${
-                sale.products.map((product) => (
-                  `[ ID: ${product.id} | AMT. ${product.amount} ]` 
-                ))
-              }`,
+              `${calculateTotalProducts(sale)} Products`,
               `$${sale.total}`
             ]}
             link={`/sale/${sale.id}`} />

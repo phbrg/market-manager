@@ -54,13 +54,22 @@ export const Sale = () => {
     await updateFetch();
     window.location.href = '/';
   }
+  
+  const saleWithProductName = [];
+  if(sale && products) {
+    sale.products.forEach((product) => {
+      products.forEach((obj) => {
+        let productWithName = {
+          id: obj.id,
+          name: obj.name,
+          amount: product.amount
+        }
 
-  const handleRemoveProduct = (e) => {
-    const filteredSale = {
-      ...sale, 
-      products: sale.products.filter(product => product.id != e.target.value)
-    } 
-    setSale(filteredSale);
+        if (obj.id == product.id) {
+          saleWithProductName.push(productWithName);
+        }
+      });
+    });
   }
 
   return (
@@ -69,21 +78,19 @@ export const Sale = () => {
         saleLoading || deleteLoading || updateLoading && <div className="loader"></div>
       }
       {
-        sale && 
-        <form onSubmit={handleSubmit}>
-          <p>ID: {sale.id}</p>
-          {
-            sale.products.map((product, key) => (
-              <div key={key}>
-                <p>ID: {product.id}</p>
-                <p>AMT. {product.amount}</p>
-                <Button handle={handleRemoveProduct} value={product.id} text='remove product' />
-              </div>
-            ))
-          }
+        sale && <div>
+          <p>Sale ID: {sale.id}</p>
+          <ul>
+            <h1>Products:</h1>
+            {
+              saleWithProductName.length >= 1 && saleWithProductName.map((product, key) => (
+                <li key={key}><p>ID: {product.id}</p> | <p>{product.name}</p> | <p>AMT. {product.amount}</p></li>
+              ))
+            }
+          </ul>
           <Button text='edit sale'/>
           <Button handle={handleDeleteSale} text='delete sale'/>
-        </form>
+        </div>
       }
     </section>
   )
