@@ -456,6 +456,12 @@ module.exports = class UserController {
       return;
     }
 
+    for(let product of sale.products) {
+      const dbProduct = await Product.findOne({ raw: true, where: { id: product.id } });
+
+      await Product.update({ amount: dbProduct.amount + product.amount }, { where: { id: product.id } });
+    }
+
     await Sale.destroy({ where: { id: parseFloat(saleId) } })
       .then(async (sale) => {
         await createLog('DELETE', `Sale [ID: ${saleId}] was deleted.`, user.id);
