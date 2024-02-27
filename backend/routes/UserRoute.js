@@ -9,7 +9,7 @@ router.get('/personal', authUser, UserController.getPersonalInformation);
 
 router.post('/registersale', authUser, UserController.registerSale);
 router.get('/sales/:param1?/:param2?', authUser, UserController.getSales);
-router.put('/editsale/:saleId', authUser, UserController.editSale);
+// router.put('/editsale/:saleId', authUser, UserController.editSale);
 router.delete('/deletesale/:saleId', authUser, UserController.deleteSale);
 
 router.post('/registerproduct', authUser, UserController.registerProduct);

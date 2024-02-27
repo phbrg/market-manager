@@ -2,7 +2,6 @@ import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
 
 import { Button } from '../../components/Button/Button';
-import { Input } from '../../components/Input/Input';
 
 import useApi from '../../hooks/useApi'
 
@@ -45,15 +44,6 @@ export const Sale = () => {
         window.location.href = '/'
       })
   }
-
-  const { data: updateSale, error: updateError, loading: updateLoading, fetchData: updateFetch } = useApi(`${import.meta.env.VITE_API_URL}/editsale/${id}`, 'PUT', sale);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    await updateFetch();
-    window.location.href = '/';
-  }
   
   const saleWithProductName = [];
   if(sale && products) {
@@ -75,7 +65,7 @@ export const Sale = () => {
   return (
     <section className='Sale'>
       {
-        saleLoading || deleteLoading || updateLoading && <div className="loader"></div>
+        saleLoading || deleteLoading && <div className="loader"></div>
       }
       {
         sale && <div>
@@ -88,7 +78,6 @@ export const Sale = () => {
               ))
             }
           </ul>
-          <Button text='edit sale'/>
           <Button handle={handleDeleteSale} text='delete sale'/>
         </div>
       }

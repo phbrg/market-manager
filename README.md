@@ -175,7 +175,7 @@ After all the app should run, if not you can contact me.
 	}
 	```
 
-#### Update sale
+#### Update sale - discontinued
 - Route: <code>/editsale/id</code>
 - Method: <code>PUT</code>
 - Body:

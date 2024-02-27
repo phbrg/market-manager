@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
+import { toast } from 'sonner'
 
 import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
@@ -52,7 +53,7 @@ export const Product = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await updateFetch();
+    await updateFetch(); 
     window.location.href = '/';
   }
 
@@ -68,7 +69,7 @@ export const Product = () => {
           <Input text='Name:' type='text' name='name' placeholder={product.name} handle={handleOnChange} />
           <Input text='Price:' type='number' name='price' placeholder={product.price} handle={handleOnChange} />
           <Input text='Amount:' type='number' name='amount' placeholder={product.amount} handle={handleOnChange} />
-          <Input text='Expiration:' type='text' name='expiration' placeholder={product.expiration} handle={handleOnChange} />
+          <Input text='Expiration:' type='text' name='expiration' placeholder={new Date(product.expiration).toLocaleDateString()} handle={handleOnChange} />
           <Button text='edit product'/>
           <Button handle={handleDeleteProduct} text='delete product'/>
         </form>

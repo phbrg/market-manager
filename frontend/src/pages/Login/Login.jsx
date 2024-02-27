@@ -33,8 +33,8 @@ export const Login = () => {
         loading && <div className='loader'></div>
       }
       <form onSubmit={handleSubmit}>
-        <Input text='Login:' type='text' name='login' placeholder='Your login' handle={handleOnChange} />
-        <Input text='Password:' type='password' name='password' placeholder='Your password' handle={handleOnChange} />
+        <Input text='Login:' type='text' name='login' placeholder='Your login' required={true} handle={handleOnChange} />
+        <Input text='Password:' type='password' name='password' placeholder='Your password' required={true} handle={handleOnChange} />
         {
           error && <p className="form-error">{error}</p>
         }

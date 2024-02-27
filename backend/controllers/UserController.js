@@ -392,53 +392,53 @@ module.exports = class UserController {
     res.status(status).json({ message: response });
   }
 
-  static async editSale(req, res) {
-    const userToken = getToken(req, res);
-    const user = getUserByToken(userToken, req, res);
+  // static async editSale(req, res) {
+  //   const userToken = getToken(req, res);
+  //   const user = getUserByToken(userToken, req, res);
 
-    const { saleId } = req.params;
-    if(!saleId) {
-      res.status(404).json({ message: 'Invalid sale ID.' });
-      return;
-    }
+  //   const { saleId } = req.params;
+  //   if(!saleId) {
+  //     res.status(404).json({ message: 'Invalid sale ID.' });
+  //     return;
+  //   }
 
-    const sale = await Sale.findOne({ raw: true, where: { id: parseFloat(saleId) } }) || null;
-    if(!sale) {
-      res.status(404).json({ message: 'Invalid sale ID.' });
-      return;
-    }
+  //   const sale = await Sale.findOne({ raw: true, where: { id: parseFloat(saleId) } }) || null;
+  //   if(!sale) {
+  //     res.status(404).json({ message: 'Invalid sale ID.' });
+  //     return;
+  //   }
 
-    const { products } = req.body;
-    if(!products || products == []) {
-      res.status(422).json({ message: 'Invalid products' });
-      return;
-    }
+  //   const { products } = req.body;
+  //   if(!products || products == []) {
+  //     res.status(422).json({ message: 'Invalid products' });
+  //     return;
+  //   }
     
-    let total = 0;
-    for(let product of products) {
-      const productOnDatabase = await Product.findOne({ raw: true, where: { id: product.id } }) || null;
-      if(!productOnDatabase) {
-        res.status(422).json({ message: `Product ID: ${product.id} is invalid.` });
-        return;
-      }
+  //   let total = 0;
+  //   for(let product of products) {
+  //     const productOnDatabase = await Product.findOne({ raw: true, where: { id: product.id } }) || null;
+  //     if(!productOnDatabase) {
+  //       res.status(422).json({ message: `Product ID: ${product.id} is invalid.` });
+  //       return;
+  //     }
 
-      total = total + (productOnDatabase.price * product.amount);
-    }
+  //     total = total + (productOnDatabase.price * product.amount);
+  //   }
 
-    const newSale = {
-      products,
-      total
-    }
+  //   const newSale = {
+  //     products,
+  //     total
+  //   }
 
-    await Sale.update(newSale, { where: { id: parseFloat(saleId) } })
-      .then(async () => {
-        await createLog('UPDATE', `A Sale [${saleId}] was updated.`, user.id);
-        res.status(200).json({ message: 'Sale successfully updated.' });
-      }).catch((err) => {
-        console.log(`> Update sale error: ${err}`);
-        res.status(500).json({ message: 'Internal server error, try again later.' });
-      })
-  }
+  //   await Sale.update(newSale, { where: { id: parseFloat(saleId) } })
+  //     .then(async () => {
+  //       await createLog('UPDATE', `A Sale [${saleId}] was updated.`, user.id);
+  //       res.status(200).json({ message: 'Sale successfully updated.' });
+  //     }).catch((err) => {
+  //       console.log(`> Update sale error: ${err}`);
+  //       res.status(500).json({ message: 'Internal server error, try again later.' });
+  //     })
+  // }
 
   static async deleteSale(req, res) {
     const userToken = getToken(req, res);
