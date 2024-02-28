@@ -68,7 +68,7 @@ export const Sale = () => {
   return (
     <section className='Sale'>
       {
-        saleLoading || deleteLoading && <div className="loader"></div>
+        saleLoading || deleteLoading || productsLoading && <div className="loader"></div>
       }
       {
         sale && <div>

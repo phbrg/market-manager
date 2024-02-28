@@ -73,6 +73,9 @@ export const RegisterSale = () => {
   return (
     <section className='RegisterSale'>
       <h1>Register Sale</h1>
+      {
+        userLoading || updateLoading && <div className="loader"></div>
+      }
       <ul>
         {
           products && products.map((product, key) => (

@@ -64,7 +64,7 @@ export const Dashboard = () => {
   return (
     <section className='Dashboard'>
       {
-        userLoading || productsLoading && <div className="loader"></div>
+        userLoading || productsLoading || salesLoading && <div className="loader"></div>
       }
       {
         user && <h1>Hello {user.name}, welcome!</h1>

@@ -134,6 +134,23 @@ module.exports = class AdminController {
           status = 200;
         }
         break;
+      case 'id':
+        if(!param2) {
+          response = 'Invalid search.';
+          status = 404;
+        } else {
+          let user = await User.findOne({ raw: true, where: { id: parseFloat(param2) } }) || null;
+          response = {
+            id: user.id,
+            name: user.name,
+            login: user.login,
+            role: user.role,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+          }
+          status = 200;
+        }
+        break;
       default:
         let users2 = await User.findAll({ raw: true }) || null;
         for(let user of users2) {
@@ -315,6 +332,15 @@ module.exports = class AdminController {
           status = 404;
         } else {
           response = await Log.findAll({ raw: true, where: { UserId: parseFloat(param2) } }) || null;
+          status = 200;
+        }
+        break;
+      case 'id': 
+        if(!param2) {
+          response = 'Invalid search.';
+          status = 404;
+        } else {
+          response = await Log.findAll({ raw: true, where: { id: parseFloat(param2) } }) || null;
           status = 200;
         }
         break;

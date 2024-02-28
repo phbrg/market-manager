@@ -42,6 +42,9 @@ export const Employees = () => {
   return (
     <section className='Employees'>
       <h1>Employees</h1>
+      {
+        employeesLoading || userLoading && <div className="loader"></div>
+      }
       <div>
         {
           employees && employees.map((employee, key) => (
@@ -50,7 +53,7 @@ export const Employees = () => {
               employee.name,
               `Login: ${employee.login}`,
               `Role: ${employee.role}`
-            ]} link={`/user/${employee.login}`}/>
+            ]} link={`/user/${employee.id}`}/>
           ))
         }
       </div>

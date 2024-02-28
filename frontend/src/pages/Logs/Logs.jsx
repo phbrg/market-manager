@@ -42,6 +42,9 @@ export const Logs = () => {
   return (
     <section className='Logs'>
       <h1>Logs</h1>
+      {
+        logsLoading || userLoading && <div className="loader"></div>
+      }
       <div>
         {
           logs && logs.map((log, key) => (
