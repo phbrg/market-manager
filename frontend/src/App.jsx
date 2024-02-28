@@ -6,6 +6,7 @@ import { Product } from './pages/Product/Product'
 import { Sale } from './pages/Sale/Sale'
 import { Logs } from './pages/Logs/Logs'
 import { Employees } from './pages/Employees/Employees'
+import { RegisterSale } from './pages/RegisterSale/RegisterSale'
 import { Login } from './pages/Login/Login'
 import { NotFound } from './pages/NotFound/NotFound'
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/sale/:id" element={<Sale />} />
           <Route path="/logs" element={<Logs />} />
           <Route path="/employees" element={<Employees />} />
+          <Route path="/registersale" element={<RegisterSale />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />}/>
         </Routes>

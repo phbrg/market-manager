@@ -78,6 +78,7 @@ export const Sale = () => {
               ))
             }
           </ul>
+          <p>${sale.total}</p>
           <Button handle={handleDeleteSale} text='delete sale'/>
         </div>
       }

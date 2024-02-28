@@ -1,6 +1,6 @@
+import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
-import { toast } from 'sonner'
 
 import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
@@ -8,7 +8,6 @@ import { Input } from '../../components/Input/Input';
 import useApi from '../../hooks/useApi'
 
 import './Product.css'
-import { useEffect, useState } from 'react';
 
 export const Product = () => {
   const token = Cookies.get('token') || null;

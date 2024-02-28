@@ -262,7 +262,7 @@ module.exports = class UserController {
   }
 
   static async registerSale(req, res) {
-    const { products } = req.body;
+    const products = req.body;
 
     if(!products || products.length == 0) {
       res.status(422).json({ message: 'Invalid products.' });
