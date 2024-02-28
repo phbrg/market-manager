@@ -90,6 +90,7 @@ After all the app should run, if not you can contact me.
 	- <code>in-stock</code>: get all in stock products.
 	- <code>out-of-stock</code>: get all unavaliable products.
 	- <code>name/name</code>: get the product by name.
+	- <code>id/id</code>: get the product by id.
 	- <code>expired</code>: get all expired products.
 	- <code>unexpired</code>: get all unexpired products.
 - Method: <code>GET</code>
@@ -215,6 +216,7 @@ After all the app should run, if not you can contact me.
 	- <code>/</code>: get all sales.
 	- <code>total</code>: get sale by total.
 	- <code>date</code>: get sale by date.
+	- <code>id/id</code>: get sale by id.
 - Method: <code>GET</code>
 - Response:
 	- Status: <code>200</code>
@@ -286,6 +288,7 @@ After all the app should run, if not you can contact me.
 	- <code>employee</code>: get all users with employee role.
 	- <code>name/name</code>: get the user by name.
 	- <code>login/login</code>: get the user by login.
+	- <code>id/id</code>: get the user by id.
 - Method: <code>GET</code>
 - Response:
 	- Status: <code>200</code>
@@ -341,6 +344,7 @@ After all the app should run, if not you can contact me.
 	- <code>update</code>: get all logs with UPDATE category.
 	- <code>delete</code>: get all logs with DELETE category.
 	- <code>userid/id</code>: get logs by user id.
+	- <code>id/id</code>: get logs by id.
 - Method: <code>GET</code>
 - Response:
 	- Status: <code>200</code>
