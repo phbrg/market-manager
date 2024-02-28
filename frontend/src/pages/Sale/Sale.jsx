@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
+import { toast } from 'sonner'
 
 import { Button } from '../../components/Button/Button';
 
@@ -31,18 +32,15 @@ export const Sale = () => {
   }, [saleGet, productsGet])
 
   useEffect(() => {
-    if(saleError) {
-      window.location.href = '/error'
-    }
-  }, [saleError])
+    if(saleError) window.location.href = '/error';
+    if(productsError) toast(`❗ ${productsError}`);
+  }, [saleError, productsError])
 
   const { data: deleteSale, error: deleteError, loading: deleteLoading, fetchData: deleteFetch } = useApi(`${import.meta.env.VITE_API_URL}/deletesale/${id}`, 'DELETE');
+
   const handleDeleteSale = async (e) => {
     // modal confirmation
     await deleteFetch()
-      .then(() => {
-        window.location.href = '/'
-      })
   }
   
   const saleWithProductName = [];
@@ -61,6 +59,11 @@ export const Sale = () => {
       });
     });
   }
+
+  useEffect(() => {
+    if(deleteSale) window.location.href = '/';
+    if(deleteError) toast(`❗ ${deleteError}`);
+  }, [deleteSale, deleteError])
 
   return (
     <section className='Sale'>

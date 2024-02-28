@@ -297,7 +297,7 @@ module.exports = class UserController {
       }
     } catch(err) {
       console.log(err);
-      res.status(422).json({ error: err.message });
+      res.status(422).json({ message: err.message });
       return;
     }
 

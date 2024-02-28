@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { toast } from 'sonner'
 
 import { Input } from '../../components/Input/Input'
 import { Button } from '../../components/Button/Button'
@@ -22,10 +23,9 @@ export const Login = () => {
   }
 
   useEffect(() => {
-    if(data) {
-      window.location.href = '/';
-    }
-  }, [data])
+    if(data) window.location.href = '/';
+    if(error) toast(`❗ ${error}`);
+  }, [data, error])
 
   return (
     <section className='Login'>
@@ -35,9 +35,6 @@ export const Login = () => {
       <form onSubmit={handleSubmit}>
         <Input text='Login:' type='text' name='login' placeholder='Your login' required={true} handle={handleOnChange} />
         <Input text='Password:' type='password' name='password' placeholder='Your password' required={true} handle={handleOnChange} />
-        {
-          error && <p className="form-error">{error}</p>
-        }
         <Button text='Login'/>
       </form>
     </section>

@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner'
 
 import { Card } from '../../components/Card/Card';
 import { Button } from '../../components/Button/Button';
@@ -55,6 +56,11 @@ export const Dashboard = () => {
     return total;
   }
 
+  useEffect(() => {
+    if(error) toast(`❗ ${error}`)
+    setError(null);
+  }, [error])
+
   return (
     <section className='Dashboard'>
       {
@@ -69,9 +75,6 @@ export const Dashboard = () => {
         <NavLink to='/registersale'>Register sale</NavLink>
         <NavLink to='/registerproduct'>Register products</NavLink>
       </div>
-      {
-        error && <p>{error}</p>
-      }
       <div>
         {
           products && products.map((product, key) => (

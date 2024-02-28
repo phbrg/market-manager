@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
+import { toast } from 'sonner'
 
 import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
@@ -37,10 +38,12 @@ export const Product = () => {
   const handleDeleteProduct = async (e) => {
     // modal confirmation
     await deleteFetch()
-      .then(() => {
-        window.location.href = '/'
-      })
   }
+
+  useEffect(() => {
+    if(deleteError) toast(`❗ ${deleteError}`);
+    if(deleteProduct) window.location.href = '/';
+  }, [deleteProduct, deleteError])
 
   const [newProduct, setNewProduct] = useState({});
   const { data: updateProduct, error: updateError, loading: updateLoading, fetchData: updateFetch } = useApi(`${import.meta.env.VITE_API_URL}/editproduct/${id}`, 'PUT', newProduct);
@@ -52,9 +55,13 @@ export const Product = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await updateFetch(); 
-    window.location.href = '/';
+    await updateFetch();
   }
+
+  useEffect(() => {
+    if(updateError) toast(`❗ ${updateError}`);
+    if(updateProduct) window.location.href = '/';
+  }, [updateProduct, updateError])
 
   return (
     <section className='Product'>

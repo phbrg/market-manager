@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import { toast } from 'sonner'
 
 import { Card } from '../../components/Card/Card';
 
@@ -33,6 +34,10 @@ export const Employees = () => {
       }
     }
   }, [userGet, employeesGet]);
+
+  useEffect(() => {
+    if(employeesError) toast(`❗ ${employeesError}`);
+  }, [employeesError])
 
   return (
     <section className='Employees'>

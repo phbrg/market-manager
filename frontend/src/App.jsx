@@ -15,7 +15,7 @@ import { Nav } from './components/Nav/Nav'
 function App() {
   return (
     <>
-      <Toaster />
+      <Toaster closeButton />
       <BrowserRouter>
         <Nav />
         <Routes>

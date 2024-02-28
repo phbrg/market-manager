@@ -25,23 +25,23 @@ module.exports = class AdminController {
 
     const loginExist = await User.findOne({ raw: true, where: { login: login.toLowerCase() } }) || null;
     if(loginExist) {
-      res.status(422).json({ error: 'Login alredy registered.' });
+      res.status(422).json({ message: 'Login alredy registered.' });
       return;
     }
 
     const stringRegex = /^[0-9a-zA-Z]+$/i;
     if(!stringRegex.test(login) || !stringRegex.test(name)) {
-      res.status(422).json({ error: 'Invalid credentials.' });
+      res.status(422).json({ message: 'Invalid credentials.' });
       return;
     }
 
     if(password.length < 8) {
-      res.status(422).json({ error: `Password too short.` });
+      res.status(422).json({ message: `Password too short.` });
       return;
     }
 
     if(password !== confirmPassword) {
-      res.status(422).json({ error: `Passwords doesn't match.` });
+      res.status(422).json({ message: `Passwords doesn't match.` });
       return;
     }
 
