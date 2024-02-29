@@ -1,4 +1,4 @@
-const { Op, where } = require('sequelize');
+const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 
 const Product = require('../models/Product');

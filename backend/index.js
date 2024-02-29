@@ -38,4 +38,4 @@ conn
     // .sync({ force: true })
     .sync()
     .then(() => app.listen(port, console.log(`> server on...`)))
-    .catch((err) => console.log(`Sync Error: ${err}`));
+    .catch((err) => console.log(`> sync Error: ${err}`));

@@ -60,7 +60,7 @@ export const User = () => {
   return (
     <section className='User'>
       {
-        userLoading || editLoading && <div className="loader"></div>
+        userLoading || editLoading || deleteLoading && <div className="loader"></div>
       }
       {
         user && <>
