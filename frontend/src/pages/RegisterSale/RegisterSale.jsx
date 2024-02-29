@@ -67,7 +67,6 @@ export const RegisterSale = () => {
   useEffect(() => {
     if(updateGet) window.location.href = '/';
     if(updateError) toast(`❗ ${updateError}`);
-    console.log(updateError);
   }, [updateGet, updateError])
 
   return (
