@@ -167,7 +167,7 @@ module.exports = class AdminController {
         status = 200;
     }
 
-    if(response == [] || response.length == 0 || response == '' || response == null) {
+    if(response == [] || response.length == 0 || response == '' || response == null || response == {}) {
       response = "Couldn't find your user.";
       status = 404;
     }
