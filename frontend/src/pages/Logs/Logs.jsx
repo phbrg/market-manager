@@ -45,7 +45,7 @@ export const Logs = () => {
       {
         logsLoading || userLoading && <div className="loader"></div>
       }
-      <div>
+      <div className='elements'>
         {
           logs && logs.map((log, key) => (
             <Card key={key} elements={[

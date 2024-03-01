@@ -1,0 +1,40 @@
+.Dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  width: 100vw;
+
+  & header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 2vh 1vw;
+
+    & h1 {
+      font-size: 1.29vw;
+      font-weight: 450;
+      color: var(--gray);
+
+      & span {
+        font-size: 1.4vw;
+      }
+    }
+
+    & .buttons {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      & div {
+        display: flex;
+        gap: 0 0.5vw;
+      }
+    }
+  }
+}

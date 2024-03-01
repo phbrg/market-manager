@@ -45,7 +45,7 @@ export const Employees = () => {
       {
         employeesLoading || userLoading && <div className="loader"></div>
       }
-      <div>
+      <div className='elements'>
         {
           employees && employees.map((employee, key) => (
             <Card key={key} elements={[

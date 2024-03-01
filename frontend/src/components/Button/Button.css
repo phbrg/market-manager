@@ -1,3 +1,37 @@
-button {
-  color: #111;
+button, .button {
+  cursor: pointer;
+  background-color: var(--lgray);
+  border-radius: 5px;
+  padding: 1.2vh 1.2vw;
+  font-size: 1vw;
+  font-weight: 450;
+
+  &:hover {
+    filter: brightness(90%);
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+}
+
+#button-success, .success {
+  background-color: var(--blue);
+  color: #fff;
+}
+
+#button-warning, .warning {
+  background-color: var(--yellow);
+}
+
+#button-delete, .delete {
+  background-color: var(--red);
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  button {
+    padding: 0.5vh 1.6vw;
+    font-size: 1vh;
+  }
 }

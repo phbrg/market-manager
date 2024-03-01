@@ -1,8 +1,24 @@
 .Card {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
   height: auto;
+  padding: 3vh 2vw;
+  border-radius: 5px;
+  border: 1px solid var(--lgray);
+
+  &:hover {
+    transform: scale(1.01);
+    background-color: var(--lgray);
+    border: 1px solid var(--gray);
+  }
+
+  & .element {
+    font-size: 1vw;
+    font-weight: 450;
+    max-width: 50%;
+    overflow: hidden;
+  }
 }

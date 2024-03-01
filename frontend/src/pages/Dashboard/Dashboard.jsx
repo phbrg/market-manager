@@ -48,6 +48,10 @@ export const Dashboard = () => {
     if(userError) setError(userError);
   }, [userGet, userError]);
 
+  useEffect(() => {
+    if(productsGet) setProducts(productsGet)
+  }, [productsGet])
+
   const calculateTotalProducts = (sale) => {
     let total = 0;
     for(let product of sale.products) {
@@ -66,16 +70,22 @@ export const Dashboard = () => {
       {
         userLoading || productsLoading || salesLoading && <div className="loader"></div>
       }
-      {
-        user && <h1>Hello {user.name}, welcome!</h1>
-      }
-      <div>
-        <Button text='View products' handle={handleShowProducts}/>
-        <Button text='View sales' handle={handleShowSales}/>
-        <NavLink to='/registersale'>Register sale</NavLink>
-        <NavLink to='/registerproduct'>Register products</NavLink>
-      </div>
-      <div>
+      <header>
+        {
+          user && <h1>Hello <span>{user.name}</span>, welcome!</h1>
+        }
+        <div className='buttons'>
+          <div>
+            <Button btnStyle='default' text='View products' handle={handleShowProducts}/>
+            <Button btnStyle='default' text='View sales' handle={handleShowSales}/>
+          </div>
+          <div>
+            <NavLink className='button success' to='/registersale'>Register sale</NavLink>
+            <NavLink className='button success' to='/registerproduct'>Register products</NavLink>
+          </div>
+        </div>
+      </header>
+      <div className='elements'>
         {
           products && products.map((product, key) => (
             <Card key={key} elements={[

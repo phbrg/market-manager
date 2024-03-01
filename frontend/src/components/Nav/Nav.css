@@ -1,4 +1,21 @@
 nav {
   display: flex;
-  gap: 0 1vw;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+  height: auto;
+  padding: 1vh 1vw;
+
+  & > * {
+    padding: 1vh 1.2vw;
+    background-color: transparent;
+    font-size: 1.1vw;
+    font-weight: 450;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: var(--lgray);
+      color: var(--text);
+    }
+  }
 }

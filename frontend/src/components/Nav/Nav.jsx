@@ -52,7 +52,7 @@ export const Nav = () => {
             <NavLink to='/employees'>employees</NavLink>
             </>
           }
-          <Button handle={handleLogout} text='logout'/>
+          <Button btnStyle='default' handle={handleLogout} text='logout'/>
         </>
       }
     </nav>

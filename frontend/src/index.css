@@ -2,18 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
 
 ::-webkit-scrollbar {
-  background-color: transparent;
-  width: 5px;
+  background-color: #e8e8e8;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--text);
-  border-radius: 1000px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--lgray);
-  cursor: pointer;
+  background-color: rgb(72, 72, 72);
 }
 
 * {
@@ -43,10 +37,11 @@ body {
 :root {
   --bg: #fff;
   --text: #111;
-  --lgray: #b0adc0;
-  --gray: #474554;
-  --dgray: #26252d;
-  --blue: #4867e6;
+  --lgray: rgb(230, 230, 230);
+  --gray: rgb(120, 120, 120);
+  --blue: rgb(83, 151, 218);
+  --yellow: rgb(246, 235, 138);
+  --red: rgb(247, 83, 83);
 }
 
 .toast {
@@ -69,6 +64,17 @@ form {
   justify-content: center;
   flex-direction: column;
   
+}
+
+.elements {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  padding: 1vh 1vw;
+  gap: 1vh 0;
 }
 
 .loader {
