@@ -35,9 +35,8 @@ export const Product = () => {
   }, [productError])
 
   const { data: deleteProduct, error: deleteError, loading: deleteLoading, fetchData: deleteFetch } = useApi(`${import.meta.env.VITE_API_URL}/deleteproduct/${id}`, 'DELETE');
-  const handleDeleteProduct = async (e) => {
-    // modal confirmation
-    await deleteFetch()
+  const handleDeleteProduct = async () => {
+    await deleteFetch();
   }
 
   useEffect(() => {
@@ -61,7 +60,7 @@ export const Product = () => {
   useEffect(() => {
     if(updateError) toast(`❗ ${updateError}`);
     if(updateProduct) window.location.href = '/';
-  }, [updateProduct, updateError])
+  }, [updateProduct, updateError]);
 
   return (
     <section className='Product'>
