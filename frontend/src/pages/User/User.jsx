@@ -44,7 +44,7 @@ export const User = () => {
 
   useEffect(() => {
     if(editGet) window.location.href = '/employees'
-    if(editError) toast(`❗ ${editError}`);
+    if(editError) toast(<p className='toast'>❗ {editError}</p>);
   }, [editGet, editError]);
 
   const handleDeleteUser = async () => {

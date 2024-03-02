@@ -40,7 +40,7 @@ export const Product = () => {
   }
 
   useEffect(() => {
-    if(deleteError) toast(`❗ ${deleteError}`);
+    if(deleteError) toast(<p className='toast'>❗ {deleteError}</p>);
     if(deleteProduct) window.location.href = '/';
   }, [deleteProduct, deleteError])
 
@@ -58,7 +58,7 @@ export const Product = () => {
   }
 
   useEffect(() => {
-    if(updateError) toast(`❗ ${updateError}`);
+    if(updateError) toast(<p className='toast'>❗ {updateError}</p>);
     if(updateProduct) window.location.href = '/';
   }, [updateProduct, updateError]);
 
@@ -68,16 +68,17 @@ export const Product = () => {
         productLoading || deleteLoading || updateLoading && <div className="loader"></div>
       }
       {
-        product && 
-        <form onSubmit={handleSubmit}>
+        product && <>
+          <form onSubmit={handleSubmit}>
           <p>ID: {product.id}</p>
-          <Input text='Name:' type='text' name='name' placeholder={product.name} handle={handleOnChange} />
-          <Input text='Price:' type='number' name='price' placeholder={product.price} handle={handleOnChange} />
-          <Input text='Amount:' type='number' name='amount' placeholder={product.amount} handle={handleOnChange} />
-          <Input text='Expiration:' type='text' name='expiration' placeholder={new Date(product.expiration).toLocaleDateString()} handle={handleOnChange} />
-          <Button text='edit product'/>
+            <Input text='Name:' type='text' name='name' placeholder={product.name} handle={handleOnChange} />
+            <Input text='Price:' type='number' name='price' placeholder={product.price} handle={handleOnChange} />
+            <Input text='Amount:' type='number' name='amount' placeholder={product.amount} handle={handleOnChange} />
+            <Input text='Expiration:' type='text' name='expiration' placeholder={new Date(product.expiration).toLocaleDateString()} handle={handleOnChange} />
+            <Button text='edit product'/>
+          </form>
           <Button handle={handleDeleteProduct} text='delete product'/>
-        </form>
+        </>
       }
     </section>
   )

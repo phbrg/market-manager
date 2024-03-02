@@ -37,7 +37,7 @@ export const RegisterSale = () => {
     const amount = document.querySelector('#product-amount').value;
 
     if(id.length == 0 || amount.length == 0) {
-      toast('❗ Invalid product ID or/and product amount.');
+      toast(<p className='toast'>❗ Invalid product ID or/and product amount.</p>);
       return;
     }
 
@@ -57,7 +57,7 @@ export const RegisterSale = () => {
 
   const handleRegisterSale = () => {
     if(products.length == 0) {
-      toast('❗ You need to add products to register a sale.');
+      toast(<p className='toast'>❗ You need to add products to register a sale.</p>);
       return;
     }
 
@@ -66,7 +66,7 @@ export const RegisterSale = () => {
 
   useEffect(() => {
     if(updateGet) window.location.href = '/';
-    if(updateError) toast(`❗ ${updateError}`);
+    if(updateError) toast(<p className='toast'>❗ {updateError}</p>);
   }, [updateGet, updateError])
 
   return (

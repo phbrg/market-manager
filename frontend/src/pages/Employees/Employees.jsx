@@ -36,7 +36,7 @@ export const Employees = () => {
   }, [userGet, employeesGet]);
 
   useEffect(() => {
-    if(employeesError) toast(`❗ ${employeesError}`);
+    if(employeesError) toast(<p className='toast'>❗ {employeesError}</p>);
   }, [employeesError])
 
   return (

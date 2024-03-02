@@ -62,7 +62,7 @@ export const Sale = () => {
 
   useEffect(() => {
     if(deleteSale) window.location.href = '/';
-    if(deleteError) toast(`❗ ${deleteError}`);
+    if(deleteError) toast(<p className='toast'>❗ {deleteError}</p>);
   }, [deleteSale, deleteError])
 
   return (
@@ -73,8 +73,8 @@ export const Sale = () => {
       {
         sale && <div>
           <p>Sale ID: {sale.id}</p>
+          <p>Products:</p>
           <ul>
-            <h1>Products:</h1>
             {
               saleWithProductName.length >= 1 && saleWithProductName.map((product, key) => (
                 <li key={key}><p>ID: {product.id}</p> | <p>{product.name}</p> | <p>AMT. {product.amount}</p></li>
@@ -82,6 +82,7 @@ export const Sale = () => {
             }
           </ul>
           <p>${sale.total}</p>
+          <p>{new Date(sale.createdAt).toLocaleDateString()}</p>
           <Button handle={handleDeleteSale} text='delete sale'/>
         </div>
       }

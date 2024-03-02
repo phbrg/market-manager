@@ -50,7 +50,7 @@ module.exports = class UserController {
     await Product.create(product)
       .then(async (product) => {
         try {
-          await createLog('CREATE', `New product registered in the database. [Name: ${product.name}, Price: ${product.price}, Amount: ${product.amount}, Expiration: ${product.expiration}]`, user.id);
+          await createLog('CREATE', `New product registered in the database.`, user.id);
         } catch(err) {
           console.log(`> create log error: ${err}`);
         }
@@ -253,7 +253,7 @@ module.exports = class UserController {
     }
 
     try {
-      await createLog('ACESS', `User [${userOnDatabase.id}] login on [IP: ${req.headers['x-forwarded-for'] || req.connection.remoteAddress}, Device: ${req.headers['user-agent']}].`);
+      await createLog('ACESS', `User [${userOnDatabase.id}] login on [IP: ${req.headers['x-forwarded-for'] || req.connection.remoteAddress}].`);
     } catch(err) {
       console.log(`> create log error: ${err}`);
     }

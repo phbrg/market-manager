@@ -5,17 +5,30 @@ nav {
   width: 100%;
   height: auto;
   padding: 1vh 1vw;
+  gap: 0 0.5vw;
 
   & > * {
     padding: 1vh 1.2vw;
     background-color: transparent;
-    font-size: 1.1vw;
-    font-weight: 450;
+    font-size: 0.95vw;
+    font-weight: 400;
     border-radius: 5px;
+    color: var(--lgray);
 
     &:hover {
-      background-color: var(--lgray);
+      background-color: var(--gray);
       color: var(--text);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  nav {
+    gap: 0 1vw;
+
+    & > * {
+      font-size: 1.2vh;
+      padding: 0.4vh 1.5vw;
     }
   }
 }

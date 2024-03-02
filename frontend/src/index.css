@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 ::-webkit-scrollbar {
-  background-color: #e8e8e8;
+  background-color: transparent;
   width: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(72, 72, 72);
+  background-color: #fff;
+  border-radius: 1000px;
 }
 
 * {
@@ -15,7 +15,7 @@
   box-shadow: none;
   box-sizing: border-box;
   font-style: normal;
-  font-family: Rubik;
+  font-family: Inter;
   margin: 0;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
@@ -35,10 +35,11 @@ body {
 }
 
 :root {
-  --bg: #fff;
-  --text: #111;
-  --lgray: rgb(230, 230, 230);
-  --gray: rgb(120, 120, 120);
+  --bg: #0e0d11;
+  --text: rgb(255, 255, 255);
+  --lgray: #b0adc0;
+  --gray: #474554;
+  --dgray: #26252d;
   --blue: rgb(83, 151, 218);
   --yellow: rgb(246, 235, 138);
   --red: rgb(247, 83, 83);
@@ -98,6 +99,15 @@ form {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.toast {
+  color: #111;
+}
+
+.error {
+  color: var(--lgray);
+  font-size: 0.9vw;
 }
 
 @media screen and (max-width: 768px) {

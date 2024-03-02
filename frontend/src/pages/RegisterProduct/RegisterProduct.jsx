@@ -29,8 +29,8 @@ export const RegisterProduct = () => {
   }, [userGet]);
 
   useEffect(() => {
-    if(userError) toast(`❗ ${userError}`);
-    if(updateError) toast(`❗ ${updateError}`);
+    if(userError) toast(<p className='toast'>❗ {userError}</p>);
+    if(updateError) toast(<p className='toast'>❗ {updateError}</p>);
   }, [userError, updateError]);
 
   const handleSubmit = async (e) => {

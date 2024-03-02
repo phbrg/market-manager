@@ -24,7 +24,7 @@ export const Login = () => {
 
   useEffect(() => {
     if(data) window.location.href = '/';
-    if(error) toast(`❗ ${error}`);
+    if(error) toast(<p className='toast'>❗ {error}</p>);
   }, [data, error])
 
   return (

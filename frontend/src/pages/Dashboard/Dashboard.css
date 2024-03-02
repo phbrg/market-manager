@@ -18,11 +18,7 @@
     & h1 {
       font-size: 1.29vw;
       font-weight: 450;
-      color: var(--gray);
-
-      & span {
-        font-size: 1.4vw;
-      }
+      color: var(--lgray);
     }
 
     & .buttons {
@@ -34,6 +30,28 @@
       & div {
         display: flex;
         gap: 0 0.5vw;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Dashboard {
+    & header {
+      gap: 1vh 0;
+      & h1 {
+        font-size: 2vh;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .Dashboard {
+    & header {
+      gap: 1vh 0;
+      & h1 {
+        font-size: 1.6vh;
       }
     }
   }

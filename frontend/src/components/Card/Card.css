@@ -1,24 +1,54 @@
 .Card {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   width: 100%;
   height: auto;
   padding: 3vh 2vw;
   border-radius: 5px;
-  border: 1px solid var(--lgray);
+  border: 1px solid var(--dgray);
 
   &:hover {
     transform: scale(1.01);
-    background-color: var(--lgray);
-    border: 1px solid var(--gray);
+    background-color: #08080a;
   }
 
   & .element {
+    text-align: center;
     font-size: 1vw;
-    font-weight: 450;
-    max-width: 50%;
+    font-weight: 400;
+    width: 20%;
     overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Card {
+    padding: 2vh 2vw;
+
+    & .element {
+      font-size: 1.1vh;
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .Card {
+    padding: 2vh 2vw;
+
+    & .element {
+      font-size: 1vh;
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .Card {
+    padding: 2vh 2vw;
+
+    & .element {
+      font-size: 0.8vh;
+    }
   }
 }

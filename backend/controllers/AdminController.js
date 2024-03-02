@@ -60,7 +60,7 @@ module.exports = class AdminController {
     await User.create(user)
       .then(async (user) => {
         try {
-          await createLog('CREATE', `New user registered in the database. [Username: ${user.name}, Login: ${user.login}]`, admin.id);
+          await createLog('CREATE', `New user registered in the database.`, admin.id);
         } catch(err) {
          console.log(`> create log error: ${err}`);
         }
@@ -255,7 +255,7 @@ module.exports = class AdminController {
     await User.update(putUser, { where: { id: parseFloat(userId) } })
       .then(async () => {
         try {
-          await createLog('UPDATE', `User [${userId}] had his account updated.`, admin.id);
+          await createLog('UPDATE', `User [${userId}] had their account updated.`, admin.id);
         } catch(err) {
           console.log(`> create log error: ${err}`);
         }

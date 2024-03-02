@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import { toast } from 'sonner'
 
 import { Card } from '../../components/Card/Card';
 
@@ -35,13 +34,12 @@ export const Logs = () => {
     }
   }, [userGet, logsGet]);
 
-  useEffect(() => {
-    if(logsError) toast(`❗ ${logsError}`);
-  }, [logsError])
-
   return (
     <section className='Logs'>
       <h1>Logs</h1>
+      {
+        logsError && <p className="error">{logsError}</p>
+      }
       {
         logsLoading || userLoading && <div className="loader"></div>
       }
@@ -52,7 +50,8 @@ export const Logs = () => {
               `ID: ${log.id}`,
               `Category: ${log.category}`,
               log.message,
-              `${new Date(log.createdAt).toLocaleDateString()}`
+              `${new Date(log.createdAt).toLocaleDateString()}`,
+              `User ID: ${log.UserId}`
             ]}/>
           ))
         }

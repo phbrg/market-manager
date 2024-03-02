@@ -1,9 +1,9 @@
 button, .button {
   cursor: pointer;
-  background-color: var(--lgray);
+  background-color: var(--gray);
   border-radius: 5px;
   padding: 1.2vh 1.2vw;
-  font-size: 1vw;
+  font-size: 0.95vw;
   font-weight: 450;
 
   &:hover {
@@ -30,8 +30,15 @@ button, .button {
 }
 
 @media screen and (max-width: 768px) {
-  button {
+  button, .button {
     padding: 0.5vh 1.6vw;
     font-size: 1vh;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  button, .button {
+    padding: 0.5vh 1.6vw;
+    font-size: 0.8vh;
   }
 }

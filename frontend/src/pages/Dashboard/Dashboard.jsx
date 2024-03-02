@@ -60,11 +60,6 @@ export const Dashboard = () => {
     return total;
   }
 
-  useEffect(() => {
-    if(error) toast(`❗ ${error}`)
-    setError(null);
-  }, [error])
-
   return (
     <section className='Dashboard'>
       {
@@ -73,6 +68,9 @@ export const Dashboard = () => {
       <header>
         {
           user && <h1>Hello <span>{user.name}</span>, welcome!</h1>
+        }
+        {
+          error && <p className="error">{error}</p>
         }
         <div className='buttons'>
           <div>
@@ -104,7 +102,8 @@ export const Dashboard = () => {
             <Card key={key} elements={[
               `ID: ${sale.id}`,
               `${calculateTotalProducts(sale)} Products`,
-              `$${sale.total}`
+              sale.total,
+              `${new Date(sale.createdAt).toLocaleDateString()}`
             ]}
             link={`/sale/${sale.id}`} />
           ))
