@@ -58,7 +58,7 @@ export const RegisterProduct = () => {
         <Input text='Price:' type='number' name='price' placeholder='29.99' handle={handleOnChange} />
         <Input text='Amount:' type='number' name='amount' placeholder='99' handle={handleOnChange} />
         <Input text='Expiration:' type='date' name='expiration' placeholder='expiration' handle={handleOnChange} />
-        <Button text='Register product'/>
+        <Button btnStyle='form' text='Register product'/>
       </form>
     </section>
   )

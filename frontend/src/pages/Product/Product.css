@@ -1,0 +1,9 @@
+.Product {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 90vh;
+  width: 100vw;
+  gap: 1vh 0;
+}

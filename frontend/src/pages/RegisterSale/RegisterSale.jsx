@@ -75,19 +75,22 @@ export const RegisterSale = () => {
       {
         userLoading || updateLoading && <div className="loader"></div>
       }
-      <ul>
-        {
-          products && products.map((product, key) => (
-            <li key={key}>ID: {product.id} | AMT. {product.amount} | <Button text='Remove product' value={product.id} handle={handleRemoveProduct} /></li>
-          ))
-        }
-      </ul>
-      <form onSubmit={handleSubmit}>
-        <Input text='Product ID:' type='number' name='products' placeholder='ID' id='product-id' />
-        <Input text='Amount:' type='number' name='' placeholder='Amount' id='product-amount' />
-        <Button text='Add product' handle={handleAddProduct} />
-        <Button text='Register sale' handle={handleRegisterSale}/>
-      </form>
+      <div>
+        <ul>
+          <li><h1>Products</h1></li>
+          {
+            products && products.map((product, key) => (
+              <li key={key}><span>ID: {product.id}</span> | <span>AMT. {product.amount}</span> | <Button btnStyle='delete' text='Remove product' value={product.id} handle={handleRemoveProduct} /></li>
+            ))
+          }
+        </ul>
+        <form onSubmit={handleSubmit}>
+          <Input text='Product ID:' type='number' name='products' placeholder='ID' id='product-id' />
+          <Input text='Amount:' type='number' name='' placeholder='Amount' id='product-amount' />
+          <Button btnStyle='form' text='Add product' handle={handleAddProduct} />
+          <Button btnStyle='form' text='Register sale' handle={handleRegisterSale}/>
+        </form>
+      </div>
     </section>
   )
 }

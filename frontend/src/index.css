@@ -61,10 +61,13 @@ section {
 
 form {
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
   flex-direction: column;
-  
+  gap: 2vh 0;
+  padding: 6vh 3vw;
+  border: 1px solid var(--dgray);
+  border-radius: 10px;
 }
 
 .elements {
@@ -113,5 +116,9 @@ form {
 @media screen and (max-width: 768px) {
   .toast {
     font-size: 1.4vh;
+  }
+
+  form {
+    padding: 2vh 5vw;
   }
 }

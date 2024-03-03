@@ -29,10 +29,25 @@ button, .button {
   color: #fff;
 }
 
+#button-form, .form {
+  background-color: var(--blue);
+  color: #fff;
+  width: 100%;
+}
+
 @media screen and (max-width: 768px) {
   button, .button {
     padding: 0.5vh 1.6vw;
     font-size: 1vh;
+  }
+
+  #button-form, #button-delete, .delete, .form {
+    padding: 1.2vh 6vw;
+    font-size: 2vh;
+  }
+
+  #button-form, .form {
+    width: 100%;
   }
 }
 

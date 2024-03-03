@@ -1,0 +1,54 @@
+.Sale {
+  font-size: 1.29vw;
+  width: 100vw;
+  min-height: 90vh;
+
+  & .id {
+    font-weight: 500;
+  }
+
+  & .products {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2vh;
+
+    & ul {
+      display: flex;
+      flex-direction: column;
+      gap: 1vh 0;
+      padding: 0;
+
+      & li {
+        display: flex;
+        gap: 0 0.5vw;
+        color: var(--gray);
+
+        & h1 {
+          font-size: 1.29vw;
+          font-weight: 400;
+          color: var(--lgray);
+        }
+      }
+    }
+  }
+
+  & .other {
+    display: flex;
+    gap: 0 1vw;
+
+    & .price {
+      font-weight: 500;
+
+      & span {
+        color: rgb(18, 183, 18);
+      }
+    }
+
+    & .date {
+      color: var(--lgray);
+      font-weight: 500;
+    }
+  }
+}

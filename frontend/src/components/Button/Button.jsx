@@ -11,6 +11,9 @@ export const Button = ({ text, handle = null, value = null, className = null, bt
     case 'delete':
       btnStyle = 'button-delete'
       break;
+    case 'form':
+      btnStyle = 'button-form'
+      break;
     default:
       btnStyle = 'button-default'
   }

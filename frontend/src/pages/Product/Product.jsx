@@ -74,10 +74,10 @@ export const Product = () => {
             <Input text='Name:' type='text' name='name' placeholder={product.name} handle={handleOnChange} />
             <Input text='Price:' type='number' name='price' placeholder={product.price} handle={handleOnChange} />
             <Input text='Amount:' type='number' name='amount' placeholder={product.amount} handle={handleOnChange} />
-            <Input text='Expiration:' type='text' name='expiration' placeholder={new Date(product.expiration).toLocaleDateString()} handle={handleOnChange} />
-            <Button text='edit product'/>
+            <Input text='Expiration:' type='text' name='expiration' placeholder={`${new Date(product.expiration).toLocaleDateString()} | MM-DD-AAAA`} handle={handleOnChange} />
+            <Button btnStyle='form' text='edit product'/>
           </form>
-          <Button handle={handleDeleteProduct} text='delete product'/>
+          <Button btnStyle='delete' handle={handleDeleteProduct} text='delete product'/>
         </>
       }
     </section>

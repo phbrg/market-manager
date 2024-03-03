@@ -1,5 +1,31 @@
 label {
+  display: flex;
+  flex-direction: column;
+  width: 25vw;
+  font-size: 1vw;
+  gap: 0.5vh 0;
+  color: var(--lgray);
+  
   & input {
-    color: #111
+    background-color: transparent;
+    font-size: 1vw;
+    font-weight: 450;
+    padding: 1vh 0.5vw;
+    border-bottom: 1px solid var(--gray);
+
+    &:focus {
+      border-bottom: 1px solid #fff;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  label {
+    font-size: 1.8vh;
+    width: 80vw;
+
+    & input {
+      font-size: 2vh;
+    }
   }
 }

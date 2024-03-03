@@ -71,19 +71,21 @@ export const Sale = () => {
         saleLoading || deleteLoading || productsLoading && <div className="loader"></div>
       }
       {
-        sale && <div>
-          <p>Sale ID: {sale.id}</p>
-          <p>Products:</p>
+        sale && <div className='products'>
+          <p className='id'>Sale ID: {sale.id}</p>
           <ul>
+            <li><h1>Products:</h1></li>
             {
               saleWithProductName.length >= 1 && saleWithProductName.map((product, key) => (
                 <li key={key}><p>ID: {product.id}</p> | <p>{product.name}</p> | <p>AMT. {product.amount}</p></li>
               ))
             }
           </ul>
-          <p>${sale.total}</p>
-          <p>{new Date(sale.createdAt).toLocaleDateString()}</p>
-          <Button handle={handleDeleteSale} text='delete sale'/>
+          <div className='other'>
+            <p className='price'><span>$</span>{sale.total}</p>
+            <p className='date'>{new Date(sale.createdAt).toLocaleDateString()}</p>
+          </div>
+          <Button btnStyle='delete' handle={handleDeleteSale} text='delete sale'/>
         </div>
       }
     </section>

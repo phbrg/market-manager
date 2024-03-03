@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { toast } from 'sonner'
 
 import { Card } from '../../components/Card/Card';
@@ -8,7 +9,6 @@ import { Button } from '../../components/Button/Button';
 import useApi from '../../hooks/useApi'
 
 import './Dashboard.css'
-import { NavLink } from 'react-router-dom';
 
 export const Dashboard = () => {
   const token = Cookies.get('token') || null;
@@ -102,7 +102,7 @@ export const Dashboard = () => {
             <Card key={key} elements={[
               `ID: ${sale.id}`,
               `${calculateTotalProducts(sale)} Products`,
-              sale.total,
+              `$${sale.total}`,
               `${new Date(sale.createdAt).toLocaleDateString()}`
             ]}
             link={`/sale/${sale.id}`} />

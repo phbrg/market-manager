@@ -1,0 +1,48 @@
+.RegisterSale {
+  gap: 2vh 0;
+  width: 100vw;
+  min-height: 90vh;
+
+  & div {
+    display: flex;
+    flex-direction: row-reverse;
+
+    & ul {
+      display: flex;
+      align-items: start;
+      justify-content: start;
+      flex-direction: column;
+      gap: 1vh 0;
+
+      & li {
+        font-size: 1vw;
+        font-weight: 500;
+        color: var(--gray);
+        gap: 0 1vw;
+
+        & h1 {
+          font-weight: 450;
+          color: var(--lgray);
+        }
+
+        &::marker {
+          color: transparent;
+        }
+      }
+    }
+  } 
+}
+
+@media screen and (max-width: 768px) {
+  .RegisterSale {
+    & div {
+      flex-direction: column-reverse;
+
+      & ul {
+        & li {
+          font-size: 2vh;
+        }
+      }
+    }
+  }
+}

@@ -54,7 +54,7 @@ export const User = () => {
 
   useEffect(() => {
     if(deleteGet) window.location.href = '/employees';
-    if(deleteError) toast(`❗ ${deleteError}`);
+    if(deleteError) toast(<p className='toast'>❗ {deleteError}</p>);
   }, [deleteGet, deleteError]);
 
   return (
@@ -72,9 +72,9 @@ export const User = () => {
             <Input text='Confirm Password:' type='password' name='confirmPassword' placeholder='Password' handle={handleOnChange} />
             <Input text='Role:' type='text' name='role' placeholder='EMPLOYEE, MANAGER, BOSS' handle={handleOnChange} />
             <Input text='Admin Password:' type='password' name='adminPassword' placeholder='Password' handle={handleOnChange} />
-            <Button text='Edit user'/>
+            <Button btnStyle='form' text='Edit user'/>
           </form>
-          <Button text='Delete user' handle={handleDeleteUser} />
+          <Button btnStyle='delete' text='Delete user' handle={handleDeleteUser} />
         </>
       }
     </section>

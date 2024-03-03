@@ -35,7 +35,7 @@ export const Login = () => {
       <form onSubmit={handleSubmit}>
         <Input text='Login:' type='text' name='login' placeholder='Your login' required={true} handle={handleOnChange} />
         <Input text='Password:' type='password' name='password' placeholder='Your password' required={true} handle={handleOnChange} />
-        <Button text='Login'/>
+        <Button btnStyle='form' text='Login'/>
       </form>
     </section>
   )

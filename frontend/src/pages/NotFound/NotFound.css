@@ -1,0 +1,30 @@
+.NotFound {
+  gap: 1vh 0;
+  width: 100vw;
+  min-height: 90vh;
+
+  & h1 {
+    font-size: 4vw;
+    color: var(--gray);
+  }
+
+  & h2 {
+    font-size: 2vw;
+    font-weight: 600;
+    color: var(--lgray);
+
+    & span {
+      font-weight: 400;
+    }
+  }
+
+  & .home {
+    color: var(--blue);
+    font-size: 1.2vw;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
