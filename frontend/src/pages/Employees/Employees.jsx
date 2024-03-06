@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { toast } from 'sonner'
+import { NavLink } from 'react-router-dom';
 
 import { Card } from '../../components/Card/Card';
 
@@ -41,10 +42,13 @@ export const Employees = () => {
 
   return (
     <section className='Employees'>
-      <h1>Employees</h1>
       {
         employeesLoading || userLoading && <div className="loader"></div>
       }
+      <h1 className='title'>Employees</h1>
+      <div className='button-parent'>
+        <NavLink className='button success' to='/registeruser'>Register user</NavLink>
+      </div>
       <div className='elements'>
         {
           employees && employees.map((employee, key) => (

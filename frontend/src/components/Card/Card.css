@@ -5,7 +5,7 @@
   flex-wrap: wrap;
   width: 100%;
   height: auto;
-  padding: 3vh 2vw;
+  padding: 4vh 2vw;
   border-radius: 5px;
   border: 1px solid var(--dgray);
 
@@ -16,8 +16,8 @@
 
   & .element {
     text-align: center;
-    font-size: 1vw;
-    font-weight: 400;
+    font-size: 1.1vw;
+    font-weight: 420;
     width: 20%;
     overflow: hidden;
   }

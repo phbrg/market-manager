@@ -1,0 +1,11 @@
+.Employees {
+  justify-content: flex-start;
+  min-height: 90vh;
+
+  & .button-parent {
+    display: flex;
+    justify-content: end;
+    padding: 1vh 0;
+    width: 97.8%;
+  }
+}

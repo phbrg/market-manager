@@ -6,6 +6,14 @@
   & div {
     display: flex;
     flex-direction: row-reverse;
+    padding: 2vh 0;
+
+    & .form {
+      max-height: 45vh;
+      height: auto;
+      width: auto;
+      background-color: transparent;
+    }
 
     & ul {
       display: flex;
@@ -21,7 +29,8 @@
         gap: 0 1vw;
 
         & h1 {
-          font-weight: 450;
+          font-size: 1.2vw;
+          font-weight: 400;
           color: var(--lgray);
         }
 

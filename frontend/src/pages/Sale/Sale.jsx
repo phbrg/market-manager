@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'sonner'
 
 import { Button } from '../../components/Button/Button';
+import { Card } from '../../components/Card/Card';
 
 import useApi from '../../hooks/useApi'
 
@@ -71,22 +72,26 @@ export const Sale = () => {
         saleLoading || deleteLoading || productsLoading && <div className="loader"></div>
       }
       {
-        sale && <div className='products'>
-          <p className='id'>Sale ID: {sale.id}</p>
-          <ul>
-            <li><h1>Products:</h1></li>
-            {
-              saleWithProductName.length >= 1 && saleWithProductName.map((product, key) => (
-                <li key={key}><p>ID: {product.id}</p> | <p>{product.name}</p> | <p>AMT. {product.amount}</p></li>
-              ))
-            }
-          </ul>
-          <div className='other'>
-            <p className='price'><span>$</span>{sale.total}</p>
+        sale && <>
+          <div className='others'>
+            <p className='id'><span>Sale:</span> {sale.id}</p>
+            <p className='price'><span>$</span> {sale.total}</p>
             <p className='date'>{new Date(sale.createdAt).toLocaleDateString()}</p>
           </div>
+          <div className='elements'>
+            <h1>Products:</h1>
+            {
+              saleWithProductName.length >= 1 && saleWithProductName.map((product, key) => (
+                <Card key={key} elements={[
+                  `ID: ${product.id}`,
+                  product.name,
+                  `AMT. ${product.amount}`
+                ]} />
+              ))
+            }
+          </div>
           <Button btnStyle='delete' handle={handleDeleteSale} text='delete sale'/>
-        </div>
+        </>
       }
     </section>
   )

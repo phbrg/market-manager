@@ -56,7 +56,7 @@ export const RegisterSale = () => {
   }
 
   const handleRegisterSale = () => {
-    if(products.length == 0) {
+    if(products.length == 0 || products == []) {
       toast(<p className='toast'>❗ You need to add products to register a sale.</p>);
       return;
     }
@@ -71,25 +71,27 @@ export const RegisterSale = () => {
 
   return (
     <section className='RegisterSale'>
-      <h1>Register Sale</h1>
+      <h1 className='title'>Register Sale</h1>
       {
         userLoading || updateLoading && <div className="loader"></div>
       }
       <div>
         <ul>
-          <li><h1>Products</h1></li>
+          <li><h1>Products:</h1></li>
           {
             products && products.map((product, key) => (
               <li key={key}><span>ID: {product.id}</span> | <span>AMT. {product.amount}</span> | <Button btnStyle='delete' text='Remove product' value={product.id} handle={handleRemoveProduct} /></li>
             ))
           }
         </ul>
-        <form onSubmit={handleSubmit}>
-          <Input text='Product ID:' type='number' name='products' placeholder='ID' id='product-id' />
-          <Input text='Amount:' type='number' name='' placeholder='Amount' id='product-amount' />
-          <Button btnStyle='form' text='Add product' handle={handleAddProduct} />
-          <Button btnStyle='form' text='Register sale' handle={handleRegisterSale}/>
-        </form>
+        <div className='form'>
+          <form onSubmit={handleSubmit}>
+            <Input text='Product ID:' type='number' name='products' placeholder='ID' id='product-id' />
+            <Input text='Amount:' type='number' name='' placeholder='Amount' id='product-amount' />
+            <Button btnStyle='form' text='Add product' handle={handleAddProduct} />
+            <Button btnStyle='form' text='Register sale' handle={handleRegisterSale}/>
+          </form>
+        </div>
       </div>
     </section>
   )

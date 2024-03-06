@@ -3,52 +3,72 @@
   width: 100vw;
   min-height: 90vh;
 
-  & .id {
-    font-weight: 500;
-  }
-
-  & .products {
+  & .others {
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-direction: column;
-    gap: 2vh;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0 1vw;
+    padding: 0 1vw;
+    width: 100%;
 
-    & ul {
-      display: flex;
-      flex-direction: column;
-      gap: 1vh 0;
-      padding: 0;
+    & p {
+      font-size: 1.1vw;
+      font-weight: 450;
+    }
 
-      & li {
-        display: flex;
-        gap: 0 0.5vw;
-        color: var(--gray);
-
-        & h1 {
-          font-size: 1.29vw;
-          font-weight: 400;
-          color: var(--lgray);
-        }
+    & .id {
+      & span {
+        color: var(--lgray);
+        font-size: 1vw;
       }
     }
-  }
-
-  & .other {
-    display: flex;
-    gap: 0 1vw;
 
     & .price {
-      font-weight: 500;
-
       & span {
-        color: rgb(18, 183, 18);
+        color: rgb(34, 197, 34);
+        font-size: 1vw;
       }
     }
 
     & .date {
       color: var(--lgray);
-      font-weight: 500;
+    }
+  }
+
+  & .elements {
+    & h1 {
+      font-size: 1.2vw;
+      font-weight: 450;
+      color: var(--lgray);
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Sale {
+    & .others {
+      & p {
+        font-size: 1.4vh;
+      }
+
+      & .id {
+        & span {
+          font-size: 1.2vh;
+        }
+      }
+
+      & .price {
+        & span {
+          font-size: 1.2vh;
+        }
+      }
+    }
+
+    & .elements {
+      & h1 {
+        font-size: 1.4vh;
+      }
     }
   }
 }

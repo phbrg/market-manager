@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react'
 import { toast } from 'sonner'
 
@@ -9,6 +10,11 @@ import useApi from '../../hooks/useApi'
 import './Login.css'
 
 export const Login = () => {
+  const token = Cookies.get('token') || null;
+  if (token) {
+    window.location.href = '/';
+  }
+
   const [user, setUser] = useState({});
   const { data, error, loading, fetchData } = useApi(`${import.meta.env.VITE_API_URL}/login`, 'POST', user);
 
@@ -33,6 +39,7 @@ export const Login = () => {
         loading && <div className='loader'></div>
       }
       <form onSubmit={handleSubmit}>
+        <p>Sign in</p>
         <Input text='Login:' type='text' name='login' placeholder='Your login' required={true} handle={handleOnChange} />
         <Input text='Password:' type='password' name='password' placeholder='Your password' required={true} handle={handleOnChange} />
         <Button btnStyle='form' text='Login'/>

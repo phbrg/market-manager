@@ -4,7 +4,7 @@
   justify-content: flex-start;
   flex-direction: column;
   flex-wrap: wrap;
-  min-height: 100vh;
+  min-height: 90vh;
   width: 100vw;
 
   & header {

@@ -36,7 +36,7 @@ export const Logs = () => {
 
   return (
     <section className='Logs'>
-      <h1>Logs</h1>
+      <h1 className='title'>Logs</h1>
       {
         logsError && <p className="error">{logsError}</p>
       }

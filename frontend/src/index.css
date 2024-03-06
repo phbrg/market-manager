@@ -65,9 +65,14 @@ form {
   justify-content: space-around;
   flex-direction: column;
   gap: 2vh 0;
-  padding: 6vh 3vw;
+  padding: 6vh 2vw;
   border: 1px solid var(--dgray);
   border-radius: 10px;
+
+  & p {
+    font-size: 1.1vw;
+    font-weight: 400;
+  }
 }
 
 .elements {
@@ -111,6 +116,11 @@ form {
 .error {
   color: var(--lgray);
   font-size: 0.9vw;
+}
+
+.title {
+  font-size: 1.4vw;
+  font-weight: 450;
 }
 
 @media screen and (max-width: 768px) {

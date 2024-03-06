@@ -31,16 +31,19 @@ export const Dashboard = () => {
   const [products, setProducts] = useState(null);
   const [sales, setSales] = useState(null);
 
+  const [showProducts, setShowProducts] = useState(null);
+  const [showSales, setShowSales] = useState(null);
+
   const handleShowProducts = () => {
     productsError ? setError(productsError) : setError(null);
-    setSales(null);
-    if(productsGet) setProducts(productsGet);
+    setShowSales(null);
+    if(products) setShowProducts(products);
   }
 
   const handleShowSales = () => {
     salesError ? setError(salesError) : setError(null);
-    setProducts(null);
-    if(salesGet) setSales(salesGet);
+    setShowProducts(null);
+    if(sales) setShowSales(sales);
   }
 
   useEffect(() => {
@@ -49,8 +52,12 @@ export const Dashboard = () => {
   }, [userGet, userError]);
 
   useEffect(() => {
-    if(productsGet) setProducts(productsGet)
-  }, [productsGet])
+    if(productsGet) {
+      setProducts(productsGet);
+      setShowProducts(productsGet);
+    };
+    if(salesGet) setSales(salesGet);
+  }, [productsGet, salesGet]);
 
   const calculateTotalProducts = (sale) => {
     let total = 0;
@@ -85,7 +92,7 @@ export const Dashboard = () => {
       </header>
       <div className='elements'>
         {
-          products && products.map((product, key) => (
+          showProducts && products.map((product, key) => (
             <Card key={key} elements={[
               `ID: ${product.id}`,
               `${product.name}`,
@@ -98,7 +105,7 @@ export const Dashboard = () => {
           ))
         }
         {
-          sales && sales.map((sale, key) => (
+          showSales && sales.map((sale, key) => (
             <Card key={key} elements={[
               `ID: ${sale.id}`,
               `${calculateTotalProducts(sale)} Products`,
