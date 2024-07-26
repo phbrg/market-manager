@@ -1,3 +1,4 @@
+`this repo is unfinished and discontinued.`
 # Market manager
 > Market Manager is a web application designed to assist various types of markets, including stores, shops, and other retail establishments. It addresses challenges like inventory, sales tracking, and employee control. It also offers features for business and financial analytics.
 
